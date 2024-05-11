@@ -1,7 +1,10 @@
 package com.insurancemanagementsystem.model;
 
 public enum Role {
-    ADMIN,
+    SYSTEM_ADMIN,
     INSURANCE_MANAGER,
-    INSURANCE_SURVEYOR
+    INSURANCE_SURVEYOR,
+    DEPENDENT,
+    POLICY_HOLDER,
+    POLICY_OWNER
 }

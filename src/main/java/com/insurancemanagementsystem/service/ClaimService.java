@@ -1,28 +1,18 @@
 package com.insurancemanagementsystem.service;
 
+import com.insurancemanagementsystem.exception.ClaimNotFoundException;
 import com.insurancemanagementsystem.model.Claim;
 
-import java.util.List;
+import java.nio.file.AccessDeniedException;
+
 
 public interface ClaimService {
 
-    Claim submitClaim(Claim claim, int policyHolderId) throws Exception;
+    Claim getClaimById(Long claimId) throws ClaimNotFoundException;
 
-    List<Claim> getAllClaims() throws Exception;
+    Claim createClaim(Claim claim, String username) throws AccessDeniedException;
 
-    List<Claim> getFilteredClaims(String filter) throws Exception;
+    Claim updateClaim(Long claimId, Claim claim, String username) throws ClaimNotFoundException, AccessDeniedException;
 
-    Claim approveClaim(int claimId) throws Exception;
-
-    Claim rejectClaim(int claimId) throws Exception;
-
-    List<Claim> getAssignedClaims() throws Exception; // For Insurance Surveyors
-
-    void requestMoreInfo(int claimId) throws Exception; // For Insurance Surveyors
-
-    Claim proposeClaim(int claimId, Claim claim) throws Exception; // For Insurance Surveyors
-
-    double getTotalClaimedAmount(int claimId) throws Exception; // For Admins
-
-    // Add methods for functionalities like retrieving specific claims, etc.
+    void deleteClaim(Long claimId, String username) throws ClaimNotFoundException, AccessDeniedException;
 }

@@ -1,6 +1,6 @@
 package com.insurancemanagementsystem.model;
 
-public abstract class User {
+public class User {
     private String userId;
     private String username;
     private String password;
@@ -39,5 +39,11 @@ public abstract class User {
 
     public Role getRole() {
         return role;
+    }
+    public void setRole(Role role) {
+        this.role = role;
+    }
+    public boolean isAdmin(){
+        return role.contains(Role.SYSTEM_ADMIN);
     }
 }

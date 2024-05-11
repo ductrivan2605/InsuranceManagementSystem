@@ -15,29 +15,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/policyholders")
 public class PolicyHolderController {
+    private User user;
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private PolicyService policyService;
-
-    @Autowired
-    private ClaimService claimService;
-
-    @GetMapping("/{userId}/policies")
-    public List<Policy> getPoliciesByPolicyHolderId(@PathVariable int userId) throws Exception {
-        return policyService.getPoliciesByPolicyHolderId(userId);
-    }
-
-    @GetMapping("/{userId}/dependents")
-    public List<User> getDependentsByPolicyOwnerId(@PathVariable int userId) throws Exception {
-        return userService.getDependentsByPolicyOwnerId(userId);
-    }
-
-    @PostMapping("/{userId}/claims")
-    public Claim submitClaim(@PathVariable int userId, @RequestBody Claim claim) throws Exception {
-        return claimService.submitClaim(claim, userId);
+    public void setUser(User user) {
+        this.user = user;
     }
 }
 

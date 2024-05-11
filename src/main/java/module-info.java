@@ -12,6 +12,9 @@ module com.insurancemanagementsystem {
     requires java.sql;
     requires spring.beans;
     requires spring.web;
+    requires spring.context;
+    requires spring.tx;
+    requires spring.data.commons;
 
     opens com.insurancemanagementsystem to javafx.fxml;
     exports com.insurancemanagementsystem;

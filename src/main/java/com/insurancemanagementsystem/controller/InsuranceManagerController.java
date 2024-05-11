@@ -11,6 +11,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/insurance-managers")
 public class InsuranceManagerController {
+    private User user;
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @Autowired
     private ClaimService claimService;
