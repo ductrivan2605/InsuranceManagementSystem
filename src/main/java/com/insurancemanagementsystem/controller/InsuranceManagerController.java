@@ -17,35 +17,4 @@ public class InsuranceManagerController {
         this.user = user;
     }
 
-    @Autowired
-    private ClaimService claimService;
-
-    @Autowired
-    private UserService userService;
-
-    @GetMapping("/claims")
-    public List<Claim> getAllClaims() throws Exception {
-        return claimService.getAllClaims();
-    }
-
-    @GetMapping("/claims/{filter}")
-    public List<Claim> getFilteredClaims(@PathVariable String filter) throws Exception {
-        // Implement filtering logic based on the filter parameter (e.g., status, date)
-        return claimService.getFilteredClaims(filter);
-    }
-
-    @GetMapping("/surveyors")
-    public List<User> getAllSurveyors() throws Exception {
-        return userService.getUsersByRole("insurance_surveyor"); // Replace with your role name
-    }
-
-    @GetMapping("/claims/{claimId}/approve")
-    public Claim approveClaim(@PathVariable int claimId) throws Exception {
-        return claimService.approveClaim(claimId);
-    }
-
-    @GetMapping("/claims/{claimId}/reject")
-    public Claim rejectClaim(@PathVariable int claimId) throws Exception {
-        return claimService.rejectClaim(claimId);
-    }
 }

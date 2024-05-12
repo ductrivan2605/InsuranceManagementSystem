@@ -1,10 +1,12 @@
 package com.insurancemanagementsystem.service;
 
+import com.insurancemanagementsystem.exception.UsernameNotFoundException;
 import com.insurancemanagementsystem.model.Role;
 import com.insurancemanagementsystem.model.User;
 import com.insurancemanagementsystem.repository.UserRepository;
 import com.insurancemanagementsystem.util.DatabaseConnection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
