@@ -5,7 +5,7 @@ import java.util.Date;
 public class Policy {
 
     private int policyId;
-    private int policyHolderId; // Foreign key referencing User (Policy Holder)
+    private int policyHolderId;
     private String policyType;
     private Date startDate;
     private Date endDate;

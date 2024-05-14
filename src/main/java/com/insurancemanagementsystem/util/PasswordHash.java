@@ -102,4 +102,23 @@ public class PasswordHash {
         }
         return diff == 0;
     }
+
+    /**
+     * Encodes a plain text password using PBKDF2 with a random salt.
+     *
+     * @param password The plain text password to encode.
+     * @return A String containing the encoded password and salt.
+     * @throws Exception If any errors occur during encoding.
+     */
+    public static String encode(String password) throws Exception {
+        return hashPassword(password);
+    }
+    public static boolean validate(String plainTextPassword, String hashedPassword) {
+        try {
+            return PasswordHash.verifyPassword(hashedPassword, plainTextPassword);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

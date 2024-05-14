@@ -1,65 +1,144 @@
 package com.insurancemanagementsystem.service;
 
-import com.insurancemanagementsystem.exception.ClaimNotFoundException;
-import com.insurancemanagementsystem.model.Claim;
-import com.insurancemanagementsystem.model.ClaimStatus;
-import com.insurancemanagementsystem.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import com.insurancemanagementsystem.repository.ClaimRepository;
+import com.insurancemanagementsystem.model.*;
+import com.insurancemanagementsystem.util.DatabaseConnection;
 
-import java.nio.file.AccessDeniedException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Date;
 
-@Service
-@Transactional
 public class ClaimServiceImpl implements ClaimService {
 
-    private final ClaimRepository claimRepository;
-    private final UserService userService;
-
-    @Autowired
-    public ClaimServiceImpl(ClaimRepository claimRepository, UserService userService) {
-        this.claimRepository = claimRepository;
-        this.userService = userService;
-    }
-
     @Override
-    public Claim getClaimById(Long claimId) throws ClaimNotFoundException {
-        return claimRepository.findById(claimId)
-                .orElseThrow(() -> new ClaimNotFoundException("Claim not found with ID: " + claimId));
-    }
+    public Claim getClaimById(String claimId) throws SQLException {
+        String query = "SELECT * FROM claims WHERE claim_id = ?";
 
-    @Override
-    public Claim createClaim(Claim claim, String username) throws AccessDeniedException {
-        User user = userService.getUserByUsername(username);
-        if (!user.isAdmin() && !user.getUserId().equals(claim.getPolicyHolder().getUserId())) {
-            throw new AccessDeniedException("Access denied: user is not an administrator or the policy holder");
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, claimId);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                User policyHolder = getPolicyHolder(resultSet.getInt("policy_holder_id"));
+                Policy policy = getPolicy(resultSet.getInt("policy_id"));
+                Date claimDate = resultSet.getDate("claim_date");
+                String cardNumber = resultSet.getString("card_number");
+                Date examDate = resultSet.getDate("exam_date");
+                double claimAmount = resultSet.getDouble("claim_amount");
+                ClaimStatus status = ClaimStatus.valueOf(resultSet.getString("claim_status"));
+                String receiverBank = resultSet.getString("receiver_bank");
+                String receiverName = resultSet.getString("receiver_name");
+                String receiverNumber = resultSet.getString("receiver_number");
+
+                return new Claim(claimId, claimDate, policyHolder, cardNumber, examDate, policy, claimAmount, status, receiverBank, receiverName, receiverNumber);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        claim.setId(null);
-        claim.setStatus(ClaimStatus.PENDING);
-        return claimRepository.save(claim);
+
+        return null;
+    }
+
+    private User getPolicyHolder(int policyHolderId) throws SQLException {
+        String query = "SELECT * FROM users WHERE user_id = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, policyHolderId);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                Long userId = resultSet.getLong("user_id");
+                String username = resultSet.getString("username");
+                String password = resultSet.getString("password");
+                String fullName = resultSet.getString("full_name");
+                String role = resultSet.getString("role");
+                String userEmail = resultSet.getString("user_email");
+
+                return new User(userId, username, password, fullName, Role.valueOf(role), userEmail);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return null;
+    }
+
+    private Policy getPolicy(int policyId) throws Exception {
+        String query = "SELECT * FROM policies WHERE policy_id = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, policyId);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                int policyIdValue = resultSet.getInt("policy_id");
+                int policyHolderId = resultSet.getInt("policy_holder_id");
+                String policyType = resultSet.getString("policy_type");
+                Date startDate = resultSet.getDate("start_date");
+                Date endDate = resultSet.getDate("end_date");
+
+                return new Policy(policyIdValue, policyHolderId, policyType, startDate, endDate);
+            }
+        }
+
+        return null;
+    }
+    @Override
+    public void updateClaim(Claim claim) throws Exception {
+        String query = "UPDATE claims SET policy_id = ?, policy_holder_id = ?, claim_date = ?, card_number = ?, exam_date = ?, claim_amount = ?, claim_status = ?, receiver_bank = ?, receiver_name = ?, receiver_number = ? WHERE claim_id = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, claim.getPolicyId().getPolicyId());
+            statement.setLong(2, claim.getPolicyHolder().getUserId());
+            statement.setDate(3, new Date(claim.getClaimDate().getTime()));
+            statement.setString(4, claim.getCardNumber());
+            statement.setDate(5, new Date(claim.getExamDate().getTime()));
+            statement.setDouble(6, claim.getClaimAmount());
+            statement.setString(7, claim.getStatus().toString());
+            statement.setString(8, claim.getReceiverBank());
+            statement.setString(9, claim.getReceiverName());
+            statement.setString(10, claim.getReceiverNumber());
+            statement.setString(11, claim.getId());
+
+            statement.executeUpdate();
+        }
     }
 
     @Override
-    public Claim updateClaim(Long claimId, Claim claim, String username) throws ClaimNotFoundException, AccessDeniedException {
-        Claim existingClaim = getClaimById(claimId);
-        User user = userService.getUserByUsername(username);
-        if (!user.isAdmin() && !user.getUserId().equals(existingClaim.getPolicyHolder().getUserId()) && !user.getUserId().equals(claim.getPolicyHolder().getUserId())) {
-            throw new AccessDeniedException("Access denied: user is not an administrator, the policy holder, or the claimant");
-        }
-        claim.setId(existingClaim.getId());
-        claim.setStatus(existingClaim.getStatus());
-        return claimRepository.save(claim);
-    }
+    public void createClaim(Claim claim) throws Exception{
+        String query = "INSERT INTO claims (claim_id, policy_id, policy_holder_id, claim_date, card_number, exam_date, claim_amount, claim_status, receiver_bank, receiver_name, receiver_number) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    @Override
-    public void deleteClaim(Long claimId, String username) throws ClaimNotFoundException, AccessDeniedException {
-        Claim claim = getClaimById(claimId);
-        User user = userService.getUserByUsername(username);
-        if (!user.isAdmin()) {
-            throw new AccessDeniedException("Access denied: user is not an administrator");
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, claim.getId());
+            statement.setInt(2, claim.getPolicyId().getPolicyId());
+            statement.setLong(3, claim.getPolicyHolder().getUserId());
+            statement.setDate(4, new Date(claim.getClaimDate().getTime()));
+            statement.setString(5, claim.getCardNumber());
+            statement.setDate(6, new Date(claim.getExamDate().getTime()));
+            statement.setDouble(7, claim.getClaimAmount());
+            statement.setString(8, claim.getStatus().toString());
+            statement.setString(9, claim.getReceiverBank());
+            statement.setString(10, claim.getReceiverName());
+            statement.setString(11, claim.getReceiverNumber());
+
+            statement.executeUpdate();
         }
-        claimRepository.deleteById(claimId);
+    }
+    @Override
+    public void deleteClaim(String claimId) throws Exception {
+        String query = "DELETE FROM claims WHERE claim_id = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, claimId);
+
+            statement.executeUpdate();
+        }
     }
 }

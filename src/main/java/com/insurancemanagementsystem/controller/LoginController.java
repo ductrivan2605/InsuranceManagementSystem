@@ -1,8 +1,10 @@
 package com.insurancemanagementsystem.controller;
 
 import com.insurancemanagementsystem.model.User;
+import com.insurancemanagementsystem.repository.UserRepository;
 import com.insurancemanagementsystem.service.UserService;
 import com.insurancemanagementsystem.service.UserServiceImpl;
+import com.insurancemanagementsystem.util.DatabaseConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,8 +18,9 @@ import java.io.IOException;
 
 public class LoginController {
     private User user;
-    private Stage primaryStage;
-    private UserService userService = new UserServiceImpl();
+    private final Stage primaryStage;
+    private UserRepository userRepository;
+    private final UserService userService = new UserServiceImpl();
 
     public LoginController(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -31,7 +34,7 @@ public class LoginController {
         // authenticate the user
         User user = authenticateUser();
         // after successful login, display the appropriate scene based on the user's role
-        if (user.getRole().equals("POLICY_HOLDER")) {
+        if (user.isAdmin()) {
             loadScene("PolicyHolderScene.fxml", "Policy Holder");
         } else if (user.getRole().equals("DEPENDENT")) {
             loadScene("DependentScene.fxml", "Policy Holder");

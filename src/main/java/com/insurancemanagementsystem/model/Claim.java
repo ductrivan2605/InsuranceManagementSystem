@@ -1,6 +1,5 @@
 package com.insurancemanagementsystem.model;
 import java.util.Date;
-import java.util.List;
 
 public class Claim {
     //    A Claim contains id, claim date, insured person, card number, exam date, list of documents, claim amount, status and receiver banking info
@@ -9,22 +8,22 @@ public class Claim {
     User policyHolder;
     String cardNumber;
     Date examDate;
-    List<String> documents;
+    Policy policyId;
     double claimAmount;
     public ClaimStatus status;
     String receiverBank;
     String receiverName;
     String receiverNumber;
 
-    public Claim(String id, Date claimDate, User policyHolder, String cardNumber, Date examDate, List<String> documents, double claimAmount, ClaimStatus status, String receiverBank, String receiverName, String receiverNumber) {
+    public Claim(String id, Date claimDate, User policyHolder, String cardNumber, Date examDate, Policy policyId, double claimAmount, ClaimStatus status, String receiverBank, String receiverName, String receiverNumber) {
         this.id = id;
         this.claimDate = claimDate;
         this.policyHolder = policyHolder;
         this.cardNumber = cardNumber;
         this.examDate = examDate;
-        this.documents = documents;
+        this.policyId = policyId;
         this.claimAmount = claimAmount;
-        this.status = status;
+        this.status = status == null ? ClaimStatus.PENDING : status;
         this.receiverBank = receiverBank;
         this.receiverName = receiverName;
         this.receiverNumber = receiverNumber;
@@ -49,9 +48,10 @@ public class Claim {
         return (java.sql.Date) examDate;
     }
 
-    public List<String> getDocuments() {
-        return documents;
+    public Policy getPolicyId() {
+        return policyId;
     }
+
 
     public double getClaimAmount() {
         return claimAmount;
@@ -80,6 +80,6 @@ public class Claim {
     public void setId() {this.id = id;}
     @Override
     public String toString() {
-        return "ID: " + id + "\n" + "Claim Date: " + claimDate + "\n" + "Policy Holder: " + policyHolder + "\n" + "Card Number: " + cardNumber + "\n" + "Exam Date: " + examDate + "\n" + "Documents: " + documents + "\n" + "Claim Amount: " + claimAmount + "\n" + "Status: " + status + "\n" + "Receiver Bank: " + receiverBank + "\n" + "Receiver Name: " + receiverName + "\n" + "Receiver Number: " + receiverNumber;
+        return "ID: " + id + "\n" + "Claim Date: " + claimDate + "\n" + "Policy Holder: " + policyHolder + "\n" + "Card Number: " + cardNumber + "\n" + "Exam Date: " + examDate + "\n" + "Policy ID: " + policyId + "\n" + "Claim Amount: " + claimAmount + "\n" + "Status: " + status + "\n" + "Receiver Bank: " + receiverBank + "\n" + "Receiver Name: " + receiverName + "\n" + "Receiver Number: " + receiverNumber;
     }
 }

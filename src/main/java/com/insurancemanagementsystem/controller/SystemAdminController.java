@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/admins")
 public class SystemAdminController {
     private User user;
 

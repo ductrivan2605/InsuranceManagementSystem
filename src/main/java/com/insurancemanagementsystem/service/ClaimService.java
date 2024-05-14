@@ -4,15 +4,16 @@ import com.insurancemanagementsystem.exception.ClaimNotFoundException;
 import com.insurancemanagementsystem.model.Claim;
 
 import java.nio.file.AccessDeniedException;
+import java.sql.SQLException;
 
 
 public interface ClaimService {
 
-    Claim getClaimById(Long claimId) throws ClaimNotFoundException;
+    Claim getClaimById(String claimId) throws SQLException;
 
-    Claim createClaim(Claim claim, String username) throws AccessDeniedException;
+    void createClaim(Claim claim) throws Exception;
 
-    Claim updateClaim(Long claimId, Claim claim, String username) throws ClaimNotFoundException, AccessDeniedException;
+    void updateClaim(Claim claim) throws Exception;
 
-    void deleteClaim(Long claimId, String username) throws ClaimNotFoundException, AccessDeniedException;
+    void deleteClaim(String claimId) throws Exception;
 }
