@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="CENTER" hgap="10" vgap="10" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: linear-gradient(to bottom right, #7F00FF, #E100FF);" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.insurancemanagementsystem.controller.SignUpController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <!-- Title Label -->
+    <Label alignment="CENTER" text="Insurance Management System" style="-fx-font-size: 24px; -fx-font-family: 'Arial'; -fx-text-fill: white;" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="0" />
+
+    <!-- Sign Up Label -->
+    <Label alignment="CENTER" text="Sign Up" style="-fx-font-size: 20px; -fx-font-family: 'Arial'; -fx-text-fill: white;" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+
+    <!-- Full Name Label -->
+    <Label text="Full Name" style="-fx-font-size: 16px; -fx-font-family: 'Arial'; -fx-text-fill: white;" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+
+    <!-- Full Name Input -->
+    <TextField fx:id="fullNameField" promptText="Type your full name" style="-fx-background-radius: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CCCCCC; -fx-border-radius: 15;" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+
+    <!-- Username Label -->
+    <Label text="Username" style="-fx-font-size: 16px; -fx-font-family: 'Arial'; -fx-text-fill: white;" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+
+    <!-- Username Input -->
+    <TextField fx:id="usernameField" promptText="Type your username" style="-fx-background-radius: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CCCCCC; -fx-border-radius: 15;" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="5" />
+
+    <!-- Email Label -->
+    <Label text="Email" style="-fx-font-size: 16px; -fx-font-family: 'Arial'; -fx-text-fill: white;" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+
+    <!-- Email Input -->
+    <TextField fx:id="emailField" promptText="Type your email" style="-fx-background-radius: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CCCCCC; -fx-border-radius: 15;" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="7" />
+
+    <!-- Password Label -->
+    <Label text="Password" style="-fx-font-size: 16px; -fx-font-family: 'Arial'; -fx-text-fill: white;" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+
+    <!-- Password Input -->
+    <PasswordField fx:id="passwordField" promptText="Type your password" style="-fx-background-radius: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CCCCCC; -fx-border-radius: 15;" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="9" />
+
+    <!-- Confirm Password Label -->
+    <Label text="Confirm Password" style="-fx-font-size: 16px; -fx-font-family: 'Arial'; -fx-text-fill: white;" GridPane.columnIndex="0" GridPane.rowIndex="10" />
+
+    <!-- Confirm Password Input -->
+    <PasswordField fx:id="confirmPasswordField" promptText="Confirm your password" style="-fx-background-radius: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CCCCCC; -fx-border-radius: 15;" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="11" />
+
+    <!-- Sign Up Button -->
+    <Button text="Sign Up" onAction="#handleSignUpButtonAction" style="-fx-background-color: linear-gradient(to bottom right, #00C9FF, #92FE9D); -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 15;" maxWidth="Infinity" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="12" />
+
+    <!-- Status Message Label -->
+    <Label fx:id="signUpMessageLabel" text="" style="-fx-text-fill: red;" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="13" />
+
+</GridPane>

@@ -1,54 +1,35 @@
 package com.insurancemanagementsystem.controller;
 
-import com.insurancemanagementsystem.model.Role;
-import com.insurancemanagementsystem.model.User;
-//import com.insurancemanagementsystem.repository.UserRepository;
-import com.insurancemanagementsystem.service.UserService;
-import com.insurancemanagementsystem.service.UserServiceImpl;
-import com.insurancemanagementsystem.util.DatabaseConnection;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
-
 
 import java.io.IOException;
 
-
-public class LoginController {
-
-    @FXML
-    private TextField usernameField;
+public class SignInController {
 
     @FXML
-    private PasswordField passwordField;
+    private Button signUpButton;
 
     @FXML
-    private Label loginMessageLabel;
-
-    // Ensure a public no-argument constructor is present
-    public LoginController() {
+    private void handleSignUpButtonAction() throws IOException {
+        Stage stage = (Stage) signUpButton.getScene().getWindow();
+        GridPane signUpPane = FXMLLoader.load(getClass().getResource("/com/insurancemanagementsystem/SignUp.fxml"));
+        Scene scene = new Scene(signUpPane);
+        stage.setScene(scene);
     }
 
     @FXML
     private void handleLoginButtonAction() {
-        // Logic to handle login action
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-
-        // Placeholder logic to update login message
-        if ("admin".equals(username) && "admin".equals(password)) {
-            loginMessageLabel.setText("Login successful!");
-        } else {
-            loginMessageLabel.setText("Login failed.");
-        }
+        // Implement login logic here
+        System.out.println("Login button clicked");
     }
 }
+
+
 
 //public class LoginController {
 ////    private User user;
