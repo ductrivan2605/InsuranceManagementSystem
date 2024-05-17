@@ -5,6 +5,7 @@ import com.insurancemanagementsystem.model.Claim;
 
 import java.nio.file.AccessDeniedException;
 import java.sql.SQLException;
+import java.util.List;
 
 
 public interface ClaimService {
@@ -16,4 +17,12 @@ public interface ClaimService {
     void updateClaim(Claim claim) throws Exception;
 
     void deleteClaim(String claimId) throws Exception;
+
+    List<Claim> getAssignedClaims();
+
+    List<Claim> getFilteredClaims(String filter);
+
+    void requestMoreInfo(int claimId);
+
+    Claim proposeClaim(int claimId, Claim claim);
 }

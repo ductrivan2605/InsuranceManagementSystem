@@ -16,6 +16,7 @@ module com.insurancemanagementsystem {
     requires spring.tx;
     requires spring.data.commons;
 
-    opens com.insurancemanagementsystem to javafx.fxml;
+    opens com.insurancemanagementsystem.controller to javafx.fxml;
     exports com.insurancemanagementsystem;
+    exports com.insurancemanagementsystem.controller;
 }

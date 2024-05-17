@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Date;
+import java.util.List;
 
 public class ClaimServiceImpl implements ClaimService {
 
@@ -140,5 +141,35 @@ public class ClaimServiceImpl implements ClaimService {
 
             statement.executeUpdate();
         }
+    }
+
+
+
+
+
+
+
+
+
+
+    // Testing only
+    @Override
+    public List<Claim> getAssignedClaims() {
+        return List.of();
+    }
+
+    @Override
+    public List<Claim> getFilteredClaims(String filter) {
+        return List.of();
+    }
+
+    @Override
+    public void requestMoreInfo(int claimId) {
+
+    }
+
+    @Override
+    public Claim proposeClaim(int claimId, Claim claim) {
+        return null;
     }
 }
