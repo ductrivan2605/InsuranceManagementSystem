@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"  padding="10" fx:controller="com.insurancemanagementsystem.controller.UserController">
+    <HBox spacing="10">
+        <Label text="Admin Dashboard" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #4CAF50;"/>
+    </HBox>
+
+    <GridPane hgap="10" vgap="10">
+        <Label text="Filter by:"/>
+        <ComboBox fx:id="filterComboBox" promptText="Select filter"/>
+
+        <Label text="Search:" GridPane.rowIndex="1"/>
+        <TextField fx:id="searchTextField" GridPane.rowIndex="1"/>
+
+        <Button text="Apply" fx:id="applyFilterButton" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+    </GridPane>
+
+    <TableView fx:id="adminTableView">
+        <columns>
+            <TableColumn text="ID" fx:id="user_id"/>
+            <TableColumn text="first name" fx:id="first_name"/>
+            <TableColumn text="last name" fx:id="last_name"/>
+            <TableColumn text="mail" fx:id="email"/>
+            <TableColumn text="pw" fx:id="password"/>
+            <TableColumn text="role" fx:id="role"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10">
+        <Button text="Add User" fx:id="addUserButton" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+        <Button text="Update User" fx:id="updateUserButton" style="-fx-background-color: #FFC107; -fx-text-fill: white;"/>
+        <Button text="Delete User" fx:id="deleteUserButton" style="-fx-background-color: #F44336; -fx-text-fill: white;"/>
+    </HBox>
+</GridPane>
