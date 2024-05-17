@@ -1,26 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.insurancemanagementsystem.controller.LoginController">
+<GridPane alignment="CENTER" hgap="10" vgap="10" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: linear-gradient(to bottom right, #7F00FF, #E100FF);" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.insurancemanagementsystem.controller.LoginController">
     <padding>
-        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 
     <!-- Title Label -->
-    <Label text="Login" style="-fx-font-size: 24px; -fx-font-family: 'Arial';"/>
+    <Label alignment="CENTER" text="Insurance Management System" style="-fx-font-size: 24px; -fx-font-family: 'Arial'; -fx-text-fill: white;" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="0" />
+
+    <!-- Login Label -->
+    <Label alignment="CENTER" text="Login" style="-fx-font-size: 20px; -fx-font-family: 'Arial'; -fx-text-fill: white;" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+
+    <!-- Username Label -->
+    <Label text="Username" style="-fx-font-size: 16px; -fx-font-family: 'Arial'; -fx-text-fill: white;" GridPane.columnIndex="0" GridPane.rowIndex="2" />
 
     <!-- Username Input -->
-    <TextField fx:id="usernameField" promptText="Username"/>
+    <TextField fx:id="usernameField" promptText="Type your username" style="-fx-background-radius: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CCCCCC; -fx-border-radius: 15;" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+
+    <!-- Password Label -->
+    <Label text="Password" style="-fx-font-size: 16px; -fx-font-family: 'Arial'; -fx-text-fill: white;" GridPane.columnIndex="0" GridPane.rowIndex="4" />
 
     <!-- Password Input -->
-    <PasswordField fx:id="passwordField" promptText="Password"/>
+    <PasswordField fx:id="passwordField" promptText="Type your password" style="-fx-background-radius: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CCCCCC; -fx-border-radius: 15;" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="5" />
+
+    <!-- Forgot Password Link -->
+    <Hyperlink text="Forgot password?" style="-fx-text-fill: #FFFFFF; -fx-font-size: 12px;" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="6" />
 
     <!-- Login Button -->
-    <Button text="Login" onAction="#handleLoginButtonAction"/>
+    <Button text="Login" onAction="#handleLoginButtonAction" style="-fx-background-color: linear-gradient(to bottom right, #00C9FF, #92FE9D); -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 15;" maxWidth="Infinity" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="7" />
 
-    <!-- Status Message Label -->
-    <Label fx:id="loginMessageLabel"/>
-</VBox>
+
+    <!-- Sign Up Label -->
+    <Label text="Or Sign Up Using" style="-fx-font-size: 12px; -fx-font-family: 'Arial'; -fx-text-fill: white;" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="10" />
+
+    <!-- Sign Up Button -->
+    <Button text="SIGN UP" style="-fx-background-color: linear-gradient(to bottom right, #ff7e5f, #feb47b); -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 15;" maxWidth="Infinity" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="11" />
+</GridPane>
