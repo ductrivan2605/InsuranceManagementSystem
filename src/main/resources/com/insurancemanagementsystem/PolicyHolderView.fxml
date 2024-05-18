@@ -22,13 +22,15 @@
         </columns>
       </TableView>
       <Label layoutX="14.0" layoutY="14.0" text="Insurance Manage System" />
-      <Label layoutX="732.0" layoutY="14.0" text="Username" />
+      <Label layoutX="732.0" layoutY="14.0" />
       <Label layoutX="14.0" layoutY="55.0" text="Label" />
       <TextField layoutX="82.0" layoutY="51.0" prefHeight="25.0" prefWidth="439.0" />
       <Button layoutX="538.0" layoutY="51.0" mnemonicParsing="false" text="Search" />
       <Button layoutX="198.0" layoutY="10.0" mnemonicParsing="false" text="My Claims" />
       <Button layoutX="302.0" layoutY="10.0" mnemonicParsing="false" text="Dependents claims" />
-      <Button layoutX="639.0" layoutY="10.0" mnemonicParsing="false" text="Save" />
+      <Button layoutX="706.0" layoutY="51.0" mnemonicParsing="false" text="Save" />
       <Button layoutX="439.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="164.0" text="Dependents Information" />
+      <Button layoutX="712.0" layoutY="10.0" mnemonicParsing="false" text="Username" />
+      <Button layoutX="625.0" layoutY="51.0" mnemonicParsing="false" text="Add New" />
    </children>
 </Pane>
