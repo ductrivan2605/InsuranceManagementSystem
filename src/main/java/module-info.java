@@ -15,6 +15,7 @@ module com.insurancemanagementsystem {
     requires spring.context;
     requires spring.tx;
     requires spring.data.commons;
+    requires org.postgresql.jdbc;
 
     opens com.insurancemanagementsystem.controller to javafx.fxml;
     exports com.insurancemanagementsystem;
