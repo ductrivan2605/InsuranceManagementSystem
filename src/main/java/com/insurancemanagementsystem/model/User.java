@@ -2,14 +2,14 @@ package com.insurancemanagementsystem.model;
 
 import javafx.beans.property.*;
 public class User {
-    private Long userId;
+    private String userId;
     private String username;
     private String password;
     private String fullName;
     private Role role;
     private String userEmail;
 
-    public User(Long userId, String username, String password, String fullName,Role role, String userEmail) {
+    public User(String userId, String username, String password, String fullName,Role role, String userEmail) {
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -18,8 +18,7 @@ public class User {
         this.userEmail = userEmail;
     }
 
-    public Long getUserId() {
-        return userId;
+    public String getUserId() {return userId;
     }
     public String getFullName() {
         return fullName;

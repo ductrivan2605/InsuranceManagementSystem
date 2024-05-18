@@ -15,13 +15,13 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     @Override
-    public Optional<User> getUserById(Long id) {
+    public Optional<User> getUserById(String id) {
         User user = null;
 
         try (Connection connection = DatabaseConnection.getConnection()) {
             String query = "SELECT * FROM users WHERE id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setLong(1, id);
+            statement.setString(1, id);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                Long id = resultSet.getLong("id");
+                String id = resultSet.getString("id");
                 String username = resultSet.getString("username");
                 String password = resultSet.getString("password");
                 String fullName = resultSet.getString("full_name");
@@ -92,7 +92,7 @@ public class UserServiceImpl implements UserService {
             statement.setString(3, user.getFullName());
             statement.setString(4, user.getRole().toString());
             statement.setString(5, user.getEmail());
-            statement.setLong(6, user.getUserId());
+            statement.setString(6, user.getUserId());
             statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -101,11 +101,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(Long id) {
+    public void deleteUser(String id) {
         try (Connection connection = DatabaseConnection.getConnection()) {
             String query = "DELETE FROM users WHERE id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setLong(1, id);
+            statement.setString(1, id);
             statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -133,7 +133,7 @@ public class UserServiceImpl implements UserService {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                Long id = resultSet.getLong("id");
+                String id = resultSet.getString("id");
                 String password = resultSet.getString("password");
                 String fullName = resultSet.getString("full_name");
                 Role role = Role.valueOf(resultSet.getString("role"));

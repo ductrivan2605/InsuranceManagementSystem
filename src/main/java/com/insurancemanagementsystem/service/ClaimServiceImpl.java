@@ -51,7 +51,7 @@ public class ClaimServiceImpl implements ClaimService {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                Long userId = resultSet.getLong("user_id");
+                String userId = resultSet.getString("user_id");
                 String username = resultSet.getString("username");
                 String password = resultSet.getString("password");
                 String fullName = resultSet.getString("full_name");
@@ -95,7 +95,7 @@ public class ClaimServiceImpl implements ClaimService {
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, claim.getPolicyId().getPolicyId());
-            statement.setLong(2, claim.getPolicyHolder().getUserId());
+            statement.setString(2, claim.getPolicyHolder().getUserId());
             statement.setDate(3, new Date(claim.getClaimDate().getTime()));
             statement.setString(4, claim.getCardNumber());
             statement.setDate(5, new Date(claim.getExamDate().getTime()));
@@ -118,7 +118,7 @@ public class ClaimServiceImpl implements ClaimService {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, claim.getId());
             statement.setInt(2, claim.getPolicyId().getPolicyId());
-            statement.setLong(3, claim.getPolicyHolder().getUserId());
+            statement.setString(3, claim.getPolicyHolder().getUserId());
             statement.setDate(4, new Date(claim.getClaimDate().getTime()));
             statement.setString(5, claim.getCardNumber());
             statement.setDate(6, new Date(claim.getExamDate().getTime()));
