@@ -41,9 +41,10 @@ public class SignUpController {
 
         if (password.equals(confirmPassword)) {
             try {
-                User user = new User(username, password, fullName, Role.USER, email);
+                User user = new User(null, username, password, fullName, Role.USER, email);
                 userService.createUser(user);
                 signUpMessageLabel.setText("Sign-up successful!");
+                signUpMessageLabel.setText("Sign-up successful! Your user ID is: " + user.getUserId());
                 signUpMessageLabel.setStyle("-fx-text-fill: green;");
             } catch (Exception e) {
                 e.printStackTrace();

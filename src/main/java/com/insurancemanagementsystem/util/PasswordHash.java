@@ -21,7 +21,7 @@ public class PasswordHash {
     public static String hashPassword(String password) throws Exception {
         byte[] salt = generateSalt();
         byte[] hashedBytes = pbkdf2(password.toCharArray(), salt, ITERATIONS, KEY_LENGTH);
-        return Base64.getEncoder().encodeToString(concat(salt, hashedBytes));
+        return Base64.getEncoder().encodeToString(salt) + ":" + Base64.getEncoder().encodeToString(hashedBytes);
     }
 
     /**
@@ -51,22 +51,6 @@ public class PasswordHash {
         SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
         PBEKeySpec spec = new PBEKeySpec(password, salt, iterations, keyLength);
         return skf.generateSecret(spec).getEncoded();
-    }
-
-    /**
-     * Concatenates two byte arrays.
-     *
-     * @param a The first byte array.
-     * @param b The second byte array.
-     * @return A new byte array containing the concatenation of a and b.
-     */
-    private static byte[] concat(byte[] a, byte[] b) {
-        int aLen = a.length;
-        int bLen = b.length;
-        byte[] c = new byte[aLen + bLen];
-        System.arraycopy(a, 0, c, 0, aLen);
-        System.arraycopy(b, 0, c, aLen, bLen);
-        return c;
     }
 
     /**
@@ -113,9 +97,17 @@ public class PasswordHash {
     public static String encode(String password) throws Exception {
         return hashPassword(password);
     }
+
+    /**
+     * Validates a plain text password against a hashed password.
+     *
+     * @param plainTextPassword The plain text password to validate.
+     * @param hashedPassword    The hashed password to compare against.
+     * @return True if the passwords match, false otherwise.
+     */
     public static boolean validate(String plainTextPassword, String hashedPassword) {
         try {
-            return PasswordHash.verifyPassword(hashedPassword, plainTextPassword);
+            return verifyPassword(hashedPassword, plainTextPassword);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
