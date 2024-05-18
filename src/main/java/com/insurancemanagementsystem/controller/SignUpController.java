@@ -1,5 +1,9 @@
 package com.insurancemanagementsystem.controller;
 
+import com.insurancemanagementsystem.model.Role;
+import com.insurancemanagementsystem.model.User;
+import com.insurancemanagementsystem.service.UserService;
+import com.insurancemanagementsystem.service.UserServiceImpl;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -25,6 +29,8 @@ public class SignUpController {
     @FXML
     private Label signUpMessageLabel;
 
+    private final UserService userService = new UserServiceImpl();
+
     @FXML
     private void handleSignUpButtonAction() {
         String fullName = fullNameField.getText();
@@ -34,9 +40,16 @@ public class SignUpController {
         String confirmPassword = confirmPasswordField.getText();
 
         if (password.equals(confirmPassword)) {
-            // Replace this with your actual sign-up logic
-            signUpMessageLabel.setText("Sign-up successful!");
-            signUpMessageLabel.setStyle("-fx-text-fill: green;");
+            try {
+                User user = new User(username, password, fullName, Role.USER, email);
+                userService.createUser(user);
+                signUpMessageLabel.setText("Sign-up successful!");
+                signUpMessageLabel.setStyle("-fx-text-fill: green;");
+            } catch (Exception e) {
+                e.printStackTrace();
+                signUpMessageLabel.setText("Sign-up failed.");
+                signUpMessageLabel.setStyle("-fx-text-fill: red;");
+            }
         } else {
             signUpMessageLabel.setText("Passwords do not match.");
             signUpMessageLabel.setStyle("-fx-text-fill: red;");

@@ -9,7 +9,8 @@ public enum Role {
     INSURANCE_SURVEYOR,
     DEPENDENT,
     POLICY_HOLDER,
-    POLICY_OWNER;
+    POLICY_OWNER,
+    USER;  // Add USER role here
 
     public boolean contains(Role role) {
         return Arrays.asList(Role.values()).contains(role);

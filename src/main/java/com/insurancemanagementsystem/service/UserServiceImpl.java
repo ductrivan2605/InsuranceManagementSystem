@@ -70,17 +70,24 @@ public class UserServiceImpl implements UserService {
     public void createUser(User user) {
         try (Connection connection = DatabaseConnection.getConnection()) {
             String query = "INSERT INTO users (username, password, full_name, role, email) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement statement = connection.prepareStatement(query);
+            PreparedStatement statement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setString(1, user.getUsername());
             statement.setString(2, PasswordHash.encode(user.getPassword()));
             statement.setString(3, user.getFullName());
             statement.setString(4, user.getRole().toString());
             statement.setString(5, user.getEmail());
             statement.executeUpdate();
+
+            // Retrieve the generated ID
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                user.setUserId(generatedKeys.getString(1)); // Assuming the ID is of type String
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     @Override
     public User updateUser(User user) {
@@ -112,26 +119,17 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-//    @Override
-//    public Role authenticateUser(String username, String password) throws Exception {
-//        User user = getUserByUsername(username);
-//
-//        if (user != null && PasswordHash.validate(password, user.getPassword())) {
-//            return user.getRole();
-//        }
-//
-//        return null;    }
-@Override
-public Role authenticateUser(String username, String password) throws Exception {
-    User user = getUserByUsername(username);
+    @Override
+    public Role authenticateUser(String username, String password) throws Exception {
+        User user = getUserByUsername(username);
 
-    // Bypassing the password hashing and validation for testing purposes
-    if (user != null && password.equals(user.getPassword())) {
-        return user.getRole();
+        // Bypassing the password hashing and validation for testing purposes
+        if (user != null && password.equals(user.getPassword())) {
+            return user.getRole();
+        }
+
+        return null;
     }
-
-    return null;
-}
 
     @Override
     public User getUserByUsername(String username) {
@@ -159,3 +157,15 @@ public Role authenticateUser(String username, String password) throws Exception 
         return user;
     }
 }
+
+
+
+
+//    @Override
+//    public Role authenticateUser(String username, String password) throws Exception {
+//        User user = getUserByUsername(username);
+//
+//        if (user != null && PasswordHash.validate(password, user.getPassword())) {
+//            return user.getRole();
+//        }
+//
