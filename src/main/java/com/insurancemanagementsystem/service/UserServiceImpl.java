@@ -30,8 +30,9 @@ public class UserServiceImpl implements UserService {
                 String fullName = resultSet.getString("full_name");
                 Role role = Role.valueOf(resultSet.getString("role"));
                 String userEmail = resultSet.getString("email");
+                Integer phoneNumber = resultSet.getInt("phone_number");
 
-                user = new User(id, username, password, fullName, role, userEmail);
+                user = new User(id, username, password, fullName, role, userEmail, phoneNumber);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,8 +57,9 @@ public class UserServiceImpl implements UserService {
                 String fullName = resultSet.getString("full_name");
                 Role role = Role.valueOf(resultSet.getString("role"));
                 String userEmail = resultSet.getString("email");
+                int phoneNumber = resultSet.getInt("phone_number");
 
-                users.add(new User(id, username, password, fullName, role, userEmail));
+                users.add(new User(id, username, password, fullName, role, userEmail, phoneNumber));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,7 +91,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(User user) {
         try (Connection connection = DatabaseConnection.getConnection()) {
-            String query = "UPDATE users SET username = ?, password = ?, full_name = ?, role = ?, email = ? WHERE id = ?";
+            String query = "UPDATE users SET username = ?, password = ?, full_name = ?, role = ?, email = ?, phone_number = ? WHERE id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, user.getUsername());
             statement.setString(2, PasswordHash.encode(user.getPassword()));
@@ -97,6 +99,7 @@ public class UserServiceImpl implements UserService {
             statement.setString(4, user.getRole().toString());
             statement.setString(5, user.getEmail());
             statement.setString(6, user.getUserId());
+            statement.setInt(7, user.getPhoneNumber());
             statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -143,8 +146,9 @@ public class UserServiceImpl implements UserService {
                 String fullName = resultSet.getString("full_name");
                 Role role = Role.valueOf(resultSet.getString("role"));
                 String userEmail = resultSet.getString("email");
+                Integer phoneNumber = resultSet.getInt("phone_number");
 
-                user = new User(id, username, password, fullName, role, userEmail);
+                user = new User(id, username, password, fullName, role, userEmail, phoneNumber);
             }
         } catch (Exception e) {
             e.printStackTrace();

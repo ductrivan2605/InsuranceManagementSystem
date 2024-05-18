@@ -10,7 +10,11 @@ public enum Role {
     DEPENDENT,
     POLICY_HOLDER,
     POLICY_OWNER,
+<<<<<<< Updated upstream
     USER;  // Add USER role here
+=======
+    USER;
+>>>>>>> Stashed changes
 
     public boolean contains(Role role) {
         return Arrays.asList(Role.values()).contains(role);

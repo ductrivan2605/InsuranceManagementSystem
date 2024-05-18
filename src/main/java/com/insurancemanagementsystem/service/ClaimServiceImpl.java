@@ -42,7 +42,7 @@ public class ClaimServiceImpl implements ClaimService {
         return null;
     }
 
-    private User getPolicyHolder(int policyHolderId) throws SQLException {
+    public static User getPolicyHolder(int policyHolderId) throws SQLException {
         String query = "SELECT * FROM users WHERE user_id = ?";
 
         try (Connection connection = DatabaseConnection.getConnection()) {
@@ -57,8 +57,9 @@ public class ClaimServiceImpl implements ClaimService {
                 String fullName = resultSet.getString("full_name");
                 String role = resultSet.getString("role");
                 String userEmail = resultSet.getString("user_email");
+                Integer phoneNumber = resultSet.getInt("phone_number");
 
-                return new User(userId, username, password, fullName, Role.valueOf(role), userEmail);
+                return new User(userId, username, password, fullName, Role.valueOf(role), userEmail, phoneNumber);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -67,7 +68,7 @@ public class ClaimServiceImpl implements ClaimService {
         return null;
     }
 
-    private Policy getPolicy(int policyId) throws Exception {
+    public static Policy getPolicy(int policyId) throws Exception {
         String query = "SELECT * FROM policies WHERE policy_id = ?";
 
         try (Connection connection = DatabaseConnection.getConnection()) {

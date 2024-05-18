@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<<<<<<< Updated upstream:src/main/resources/com/insurancemanagementsystem/TheSystemAdminView.fxml
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.insurancemanagementsystem.controller.UserController">
+
+
+    <HBox spacing="10" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+    <HBox spacing="10" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+
+    <TableView fx:id="adminTableView" layoutY="107.0" prefHeight="494.0" prefWidth="800.0">
+=======
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.insurancemanagementsystem.controller.SystemAdminUserController">
+   <children>
+      <TableView fx:id="userTableView" layoutY="107.0" minHeight="-Infinity" minWidth="-Infinity">
+>>>>>>> Stashed changes:src/main/resources/com/insurancemanagementsystem/TheSystemAdmin_User.fxml
+        <columns>
+          <TableColumn fx:id="userIDTableColumn" prefWidth="69.5" text="User ID" />
+          <TableColumn fx:id="userNameTableColumn" prefWidth="97.0" text="username" />
+            <TableColumn fx:id="passWordTableColumn" prefWidth="187.0" text="password(Hashed)" />
+            <TableColumn fx:id="fullNameTableColumn" prefWidth="127.5" text="Full name" />
+            <TableColumn fx:id="roleTableColumn" prefWidth="103.0" text="Role" />
+            <TableColumn fx:id="userEmailTableColumn" prefWidth="119.199951171875" text="Email" />
+            <TableColumn fx:id="userEmailTableColumn1" prefWidth="94.4000244140625" text="Phone number" />
+        </columns>
+<<<<<<< Updated upstream:src/main/resources/com/insurancemanagementsystem/TheSystemAdminView.fxml
+    </TableView>
+    <Label layoutX="14.0" layoutY="14.0" text="Insurance Manage System" />
+    <Label layoutX="14.0" layoutY="55.0" text="Label" />
+    <TextField layoutX="82.0" layoutY="51.0" prefHeight="25.0" prefWidth="439.0" />
+    <Button layoutX="538.0" layoutY="51.0" mnemonicParsing="false" text="Search" />
+    <Button layoutX="163.0" layoutY="10.0" mnemonicParsing="false" text="Claims of beneficiaries" />
+    <Button layoutX="302.0" layoutY="10.0" mnemonicParsing="false" text="Beneficiaries Information" />
+    <Button layoutX="738.0" layoutY="51.0" mnemonicParsing="false" text="Save" />
+    <Button layoutX="465.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="164.0" text="Calulate" />
+    <HBox spacing="10" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="4">
+           <Button fx:id="updateUserButton" onAction="#handleUpdateUser"   text="Update New User" />
+           <Button fx:id="addUserButton" onAction="#handleAddUser"   text="Add New User" />
+           <Button fx:id="deleteUserButton" onAction="#handleDeleteUser"   text="Delete New User" />
+           <Button fx:id="applyFilterUserButton" onAction="#applyFilter" layoutX="43.0" layoutY="510.0"  text="search function" />
+           <Button layoutX="709.0" layoutY="10.0" mnemonicParsing="false" text="Username" />
+    </HBox>
+=======
+      </TableView>
+      <Label layoutX="14.0" layoutY="14.0" text="Insurance Manage System" />
+      <Label layoutX="14.0" layoutY="55.0" text="Find user :" />
+      <TextField layoutX="82.0" layoutY="51.0" prefHeight="25.0" prefWidth="439.0" />
+      <Button layoutX="538.0" layoutY="51.0" mnemonicParsing="false" text="Search" />
+      <Button layoutX="163.0" layoutY="10.0" mnemonicParsing="false" text="Claims of beneficiaries" />
+      <Button layoutX="302.0" layoutY="10.0" mnemonicParsing="false" text="Beneficiaries Information" />
+      <Button layoutX="738.0" layoutY="51.0" mnemonicParsing="false" text="Save" />
+      <Button layoutX="465.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="164.0" text="Policies" />
+      <Button layoutX="596.0" layoutY="51.0" mnemonicParsing="false" text="Add New" />
+      <Button layoutX="675.0" layoutY="51.0" mnemonicParsing="false" text="Delete" />
+      <Button layoutX="709.0" layoutY="10.0" mnemonicParsing="false" text="Username" />
+   </children>
+>>>>>>> Stashed changes:src/main/resources/com/insurancemanagementsystem/TheSystemAdmin_User.fxml
+</Pane>
