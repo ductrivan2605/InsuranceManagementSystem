@@ -6,10 +6,16 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <TableView layoutY="107.0" prefHeight="494.0" prefWidth="800.0">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.insurancemanagementsystem.controller.UserController">
+
+
+    <HBox spacing="10" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+    <HBox spacing="10" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+
+    <TableView fx:id="adminTableView" layoutY="107.0" prefHeight="494.0" prefWidth="800.0">
         <columns>
           <TableColumn prefWidth="69.5" text="claim_id" />
           <TableColumn prefWidth="97.0" text="policy_number" />
@@ -19,17 +25,20 @@
             <TableColumn prefWidth="127.5" text="amount_claimed" />
             <TableColumn prefWidth="130.0" text="surveyor_id" />
         </columns>
-      </TableView>
-      <Label layoutX="14.0" layoutY="14.0" text="Insurance Manage System" />
-      <Label layoutX="14.0" layoutY="55.0" text="Label" />
-      <TextField layoutX="82.0" layoutY="51.0" prefHeight="25.0" prefWidth="439.0" />
-      <Button layoutX="538.0" layoutY="51.0" mnemonicParsing="false" text="Search" />
-      <Button layoutX="163.0" layoutY="10.0" mnemonicParsing="false" text="Claims of beneficiaries" />
-      <Button layoutX="302.0" layoutY="10.0" mnemonicParsing="false" text="Beneficiaries Information" />
-      <Button layoutX="738.0" layoutY="51.0" mnemonicParsing="false" text="Save" />
-      <Button layoutX="465.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="164.0" text="Calulate" />
-      <Button layoutX="596.0" layoutY="51.0" mnemonicParsing="false" text="Add New" />
-      <Button layoutX="675.0" layoutY="51.0" mnemonicParsing="false" text="Delete" />
-      <Button layoutX="709.0" layoutY="10.0" mnemonicParsing="false" text="Username" />
-   </children>
+    </TableView>
+    <Label layoutX="14.0" layoutY="14.0" text="Insurance Manage System" />
+    <Label layoutX="14.0" layoutY="55.0" text="Label" />
+    <TextField layoutX="82.0" layoutY="51.0" prefHeight="25.0" prefWidth="439.0" />
+    <Button layoutX="538.0" layoutY="51.0" mnemonicParsing="false" text="Search" />
+    <Button layoutX="163.0" layoutY="10.0" mnemonicParsing="false" text="Claims of beneficiaries" />
+    <Button layoutX="302.0" layoutY="10.0" mnemonicParsing="false" text="Beneficiaries Information" />
+    <Button layoutX="738.0" layoutY="51.0" mnemonicParsing="false" text="Save" />
+    <Button layoutX="465.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="164.0" text="Calulate" />
+    <HBox spacing="10" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="4">
+           <Button fx:id="updateUserButton" onAction="#handleUpdateUser"   text="Update New User" />
+           <Button fx:id="addUserButton" onAction="#handleAddUser"   text="Add New User" />
+           <Button fx:id="deleteUserButton" onAction="#handleDeleteUser"   text="Delete New User" />
+           <Button fx:id="applyFilterUserButton" onAction="#applyFilter" layoutX="43.0" layoutY="510.0"  text="search function" />
+           <Button layoutX="709.0" layoutY="10.0" mnemonicParsing="false" text="Username" />
+    </HBox>
 </Pane>
