@@ -1,136 +1,93 @@
 package com.insurancemanagementsystem.controller;
 
+import com.insurancemanagementsystem.MainApp;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class SignInController {
 
     @FXML
-    private Button signUpButton;
+    private TextField usernameField;
 
     @FXML
-    private void handleSignUpButtonAction() throws IOException {
-        Stage stage = (Stage) signUpButton.getScene().getWindow();
-        GridPane signUpPane = FXMLLoader.load(getClass().getResource("/com/insurancemanagementsystem/SignUp.fxml"));
-        Scene scene = new Scene(signUpPane);
-        stage.setScene(scene);
+    private PasswordField passwordField;
+
+    private MainApp mainApp;
+
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
     }
 
     @FXML
-    private void handleLoginButtonAction() {
-        // Implement login logic here
-        System.out.println("Login button clicked");
+    private void handleSignInButtonAction() {
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+
+        if (validateSignIn(username, password)) {
+            // Fetch user role from database and show appropriate view
+            String role = getUserRole(username, password);
+            if (role != null) {
+                mainApp.showViewBasedOnRole(role);
+            } else {
+                showAlert("Sign In Failed", "Invalid username or password.");
+            }
+        } else {
+            showAlert("Sign In Failed", "Invalid username or password.");
+        }
+    }
+
+    private boolean validateSignIn(String username, String password) {
+        // Implement database validation here
+        return getUserRole(username, password) != null;
+    }
+
+    private String getUserRole(String username, String password) {
+        String role = null;
+        try (Connection conn = DriverManager.getConnection("postgresql://claiminsurancesystem_owner:pSFcMzs4X7Kk@ep-old-frost-a1v0y414.ap-southeast-1.aws.neon.tech/claiminsurancesystem?sslmode=require")) {
+            String sql = "SELECT role FROM users WHERE username = ? AND password = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                role = rs.getString("role");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return role;
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    @FXML
+    private void handleSignUpButtonAction() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/insurancemanagementsystem/SignUp.fxml"));
+            GridPane signUpRoot = loader.load();
+            Scene scene = new Scene(signUpRoot);
+            mainApp.getPrimaryStage().setScene(scene);
+            mainApp.getPrimaryStage().setTitle("Insurance Management System - Sign Up");
+            mainApp.getPrimaryStage().show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
-
-
-
-//public class LoginController {
-////    private User user;
-////    private final Stage primaryStage;
-//// //   private UserRepository userRepository;
-////    private final UserService userService = new UserServiceImpl();
-////
-////    public LoginController(Stage primaryStage) {
-////        this.primaryStage = primaryStage;
-////    }
-////
-////    public void setUser(User user) {
-////        this.user = user;
-////    }
-////    @FXML
-////    private void handleLoginButtonAction(ActionEvent event) throws Exception {
-////        // authenticate the user
-////        //User user = authenticateUser();
-////        // after successful login, display the appropriate scene based on the user's role
-////        if (user.isAdmin()) {
-////            loadScene("PolicyHolderScene.fxml", "Policy Holder");
-////        } else if (user.getRole().equals("DEPENDENT")) {
-////            loadScene("DependentScene.fxml", "Policy Holder");
-////        } else if (user.getRole().equals("POLICY_OWNER")) {
-////            loadScene("PolicyOwnerScene.fxml", "Policy Holder");
-////        } else if (user.getRole().equals("INSURANCE_SURVEYOR")) {
-////            loadScene("InsuranceSurveyorScene.fxml", "Policy Holder");
-////        } else if (user.getRole().equals("INSURANCE_MANAGER")) {
-////            loadScene("InsuranceManagerScene.fxml", "Policy Holder");
-////        } else if (user.getRole().equals("SYSTEM_ADMIN")) {
-////            loadScene("SystemAdminScene.fxml", "Policy Holder");
-////        } else {
-////            // display an error message for unsupported roles
-////            displayErrorMessage("Unsupported user role. Please contact support.");
-////        }
-//    }
-
-//    private User authenticateUser() throws Exception {
-//        // get the user's username and password from the UI
-//        String username = usernameField.getText();
-//        String password = passwordField.getText();
-//
-//        // validate the user's credentials
-//        Role user = userService.authenticateUser(username, password);
-//
-//        if (user == null) {
-//            // display an error message if the user's credentials are invalid
-//            displayErrorMessage("Invalid username or password. Please try again.");
-//        }
-//
-//        return user;
-//    }
-//
-//    private void loadScene(String fxmlFile, String title) {
-//        try {
-//            // load the fxml file
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-//            Parent root = loader.load();
-//
-//            // get the controller for the loaded fxml file
-//            Object controller = loader.getController();
-//
-//            // cast the controller to the appropriate custom controller class
-//            if (fxmlFile.equals("PolicyHolderScene.fxml")) {
-//                PolicyHolderController policyHolderController = (PolicyHolderController) controller;
-//                policyHolderController.setUser(user);
-//            } else if (fxmlFile.equals("DependentScene.fxml")) {
-//                DependentController dependentController = (DependentController) controller;
-//                dependentController.setUser(user);
-//            } else if (fxmlFile.equals("PolicyOwnerScene.fxml")) {
-//                PolicyOwnerController policyOwnerController = (PolicyOwnerController) controller;
-//                policyOwnerController.setUser(user);
-//            } else if (fxmlFile.equals("InsuranceSurveyorScene.fxml")) {
-//                InsuranceSurveyorController insuranceSurveyorController = (InsuranceSurveyorController) controller;
-//                insuranceSurveyorController.setUser(user);
-//            } else if (fxmlFile.equals("InsuranceManagerScene.fxml")) {
-//                InsuranceManagerController insuranceManagerController = (InsuranceManagerController) controller;
-//                insuranceManagerController.setUser(user);
-//            } else if (fxmlFile.equals("SystemAdminScene.fxml")) {
-//                SystemAdminController systemAdminController = (SystemAdminController) controller;
-//                systemAdminController.setUser(user);
-//            }
-//
-//            // create a new scene with the loaded root and title
-//            Scene scene = new Scene(root);
-//
-//            // set the new scene for the primary stage
-//            primaryStage.setScene(scene);
-//
-//            // set the primary stage title
-//            primaryStage.setTitle(title);
-//
-//            // show the primary stage
-//            primaryStage.show();
-//        } catch (IOException e) {
-//            // handle the exception
-//            displayErrorMessage("Failed to load the scene. Please contact support.");
-//        }
-//    }
-//    @FXML private TextField usernameField;
-//    @FXML private PasswordField passwordField;
-//    private void displayErrorMessage(String s) {
-//    }
-//}

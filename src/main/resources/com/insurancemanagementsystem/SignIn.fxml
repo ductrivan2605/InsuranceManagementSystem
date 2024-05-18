@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -30,8 +32,8 @@
     <!-- Forgot Password Link -->
     <Hyperlink text="Forgot password?" style="-fx-text-fill: #FFFFFF; -fx-font-size: 12px;" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="6" />
 
-    <!-- Login Button -->
-    <Button text="Login" onAction="#handleLoginButtonAction" style="-fx-background-color: linear-gradient(to bottom right, #00C9FF, #92FE9D); -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 15;" maxWidth="Infinity" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="7" />
+    <!-- Sign In Button -->
+    <Button text="Sign In" onAction="#handleSignInButtonAction" style="-fx-background-color: linear-gradient(to bottom right, #00C9FF, #92FE9D); -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 15;" maxWidth="Infinity" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="7" />
 
     <!-- Sign Up Label -->
     <Label text="Or Sign Up Using" style="-fx-font-size: 12px; -fx-font-family: 'Arial'; -fx-text-fill: white;" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="8" />
