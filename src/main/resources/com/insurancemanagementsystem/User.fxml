@@ -31,12 +31,12 @@
 
     <TableView fx:id="adminTableView" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="3">
         <columns>
-            <TableColumn text="ID" fx:id="user_id"/>
-            <TableColumn text="First Name" fx:id="first_name"/>
-            <TableColumn text="Last Name" fx:id="last_name"/>
-            <TableColumn text="Email" fx:id="email"/>
+            <TableColumn text="ID" fx:id="userId"/>
+            <TableColumn text="User name" fx:id="username"/>
             <TableColumn text="Password" fx:id="password"/>
+            <TableColumn text="Full Name" fx:id="fullName"/>
             <TableColumn text="Role" fx:id="role"/>
+            <TableColumn text="Email" fx:id="userEmail"/>
         </columns>
     </TableView>
 
