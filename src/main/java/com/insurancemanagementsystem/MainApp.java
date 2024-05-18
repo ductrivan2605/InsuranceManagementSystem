@@ -10,7 +10,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/insurancemanagementsystem/PolicyHolderView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/insurancemanagementsystem/SignIn.fxml"));
         BorderPane root = loader.load();
         Scene scene = new Scene(root, 800, 600);
         primaryStage.setScene(scene);
