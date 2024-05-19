@@ -124,10 +124,10 @@ public class MainApp extends Application {
     // test view for each user type's view - testing purpose will be commented
     public void testView() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/insurancemanagementsystem/TheSystemAdmin_PolicyView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/insurancemanagementsystem/TheSystemAdmin_ClaimView.fxml"));
             AnchorPane signInLayout = loader.load();
 
-            SystemAdminPolicyController controller = loader.getController();
+            SystemAdminClaimController controller = loader.getController();
             controller.setMainApp(this);
 
             Scene scene = new Scene(signInLayout);

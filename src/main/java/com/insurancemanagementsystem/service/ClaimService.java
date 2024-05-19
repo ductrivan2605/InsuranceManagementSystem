@@ -10,13 +10,13 @@ import java.util.List;
 
 public interface ClaimService {
 
-    Claim getClaimById(String claimId) throws SQLException;
+    Claim getClaimById(int claimId) throws SQLException;
 
     void createClaim(Claim claim) throws Exception;
 
     void updateClaim(Claim claim) throws Exception;
 
-    void deleteClaim(String claimId) throws Exception;
+    void deleteClaim(int claimId) throws Exception;
 
     List<Claim> getAssignedClaims();
 

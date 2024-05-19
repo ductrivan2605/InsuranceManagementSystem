@@ -76,7 +76,7 @@ public class SystemAdminClaimController implements Initializable {
             ResultSet queryOutput = statement.executeQuery(claimViewQuery);
 
             while (queryOutput.next()) {
-                String queryClaimID = queryOutput.getString("id");
+                int queryClaimID = queryOutput.getInt("claim_id");
                 Date queryClaimDate = queryOutput.getDate("claim_date");
                 User queryPolicyHolderID = ClaimServiceImpl.getPolicyHolder(queryOutput.getString("policy_holder_id"));
                 String queryCardNumber = queryOutput.getString("card_number");
@@ -91,7 +91,7 @@ public class SystemAdminClaimController implements Initializable {
                 claimSearchObservableList.add(new Claim(queryClaimID, queryClaimDate, queryPolicyHolderID, queryCardNumber, queryExamDate, queryPolicyID, queryClaimAmount, queryStatus, queryReceiverBank, queryReceiverName, queryReceiverNumber));
             }
 
-            claimIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+            claimIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("ClaimId"));
             claimDateTableColumn.setCellValueFactory(new PropertyValueFactory<>("claimDate"));
             policyHolderIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("policyHolderId"));
             cardNumberTableColumn.setCellValueFactory(new PropertyValueFactory<>("cardNumber"));
@@ -115,9 +115,7 @@ public class SystemAdminClaimController implements Initializable {
 
                     String searchKeyword = newValue.toLowerCase();
 
-                    if (claim.getId().toLowerCase().contains(searchKeyword)) {
-                        return true;
-                    } else if (claim.getClaimDate().toString().contains(searchKeyword)) {
+                    if (claim.getClaimDate().toString().contains(searchKeyword)) {
                         return true;
                     } else if (claim.getPolicyHolder().toString().toLowerCase().contains(searchKeyword)) {
                         return true;
