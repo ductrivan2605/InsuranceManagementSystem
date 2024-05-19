@@ -7,24 +7,27 @@ public class User {
     private String fullName;
     private Role role;
     private String email;
+    private String phoneNumber; // Add phoneNumber field
 
     // Constructor without ID, for creating new users
-    public User(String username, String password, String fullName, Role role, String email) {
+    public User(String username, String password, String fullName, Role role, String email, String phoneNumber) {
         this.username = username;
         this.password = password;
         this.fullName = fullName;
         this.role = role;
         this.email = email;
+        this.phoneNumber = phoneNumber; // Initialize phoneNumber
     }
 
     // Constructor with ID, for retrieving users from the database
-    public User(String userId, String username, String password, String fullName, Role role, String email) {
+    public User(String userId, String username, String password, String fullName, Role role, String email, String phoneNumber) {
         this.userId = userId;
         this.username = username;
         this.password = password;
         this.fullName = fullName;
         this.role = role;
         this.email = email;
+        this.phoneNumber = phoneNumber; // Initialize phoneNumber
     }
 
     // Getters and Setters
@@ -72,6 +75,14 @@ public class User {
         this.role = role;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public boolean isAdmin() {
         return role == Role.SYSTEM_ADMIN;
     }
@@ -95,100 +106,4 @@ public class User {
     public boolean isDependent() {
         return role == Role.DEPENDENT;
     }
-
-//    public int getPhoneNumber() {
-//    }
 }
-
-
-// code due to the database
-
-//public class User {
-//    private final IntegerProperty id;
-//    private final StringProperty firstName;
-//    private final StringProperty lastName;
-//    private final StringProperty email;
-//    private final StringProperty password;
-//    private final StringProperty role;
-//
-//    public User(int id, String firstName, String lastName, String email, String password, String role) {
-//        this.id = new SimpleIntegerProperty(id);
-//        this.firstName = new SimpleStringProperty(firstName);
-//        this.lastName = new SimpleStringProperty(lastName);
-//        this.email = new SimpleStringProperty(email);
-//        this.password = new SimpleStringProperty(password);
-//        this.role = new SimpleStringProperty(role);
-//    }
-//
-//    public int getId() {
-//        return id.get();
-//    }
-//
-//    public void setId(int id) {
-//        this.id.set(id);
-//    }
-//
-//    public IntegerProperty idProperty() {
-//        return id;
-//    }
-//
-//    public String getFirstName() {
-//        return firstName.get();
-//    }
-//
-//    public void setFirstName(String firstName) {
-//        this.firstName.set(firstName);
-//    }
-//
-//    public StringProperty firstNameProperty() {
-//        return firstName;
-//    }
-//
-//    public String getLastName() {
-//        return lastName.get();
-//    }
-//
-//    public void setLastName(String lastName) {
-//        this.lastName.set(lastName);
-//    }
-//
-//    public StringProperty lastNameProperty() {
-//        return lastName;
-//    }
-//
-//    public String getEmail() {
-//        return email.get();
-//    }
-//
-//    public void setEmail(String email) {
-//        this.email.set(email);
-//    }
-//
-//    public StringProperty emailProperty() {
-//        return email;
-//    }
-//
-//    public String getPassword() {
-//        return password.get();
-//    }
-//
-//    public void setPassword(String password) {
-//        this.password.set(password);
-//    }
-//
-//    public StringProperty passwordProperty() {
-//        return password;
-//    }
-//
-//    public String getRole() {
-//        return role.get();
-//    }
-//
-//    public void setRole(String role) {
-//        this.role.set(role);
-//    }
-//
-//    public StringProperty roleProperty() {
-//        return role;
-//    }
-//}
