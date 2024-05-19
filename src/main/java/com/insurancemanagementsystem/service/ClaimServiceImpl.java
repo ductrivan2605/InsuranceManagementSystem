@@ -6,23 +6,22 @@ import com.insurancemanagementsystem.util.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Date;
 import java.util.List;
 
 public class ClaimServiceImpl implements ClaimService {
 
     @Override
-    public Claim getClaimById(String claimId)  {
+    public Claim getClaimById(int claimId)  {
         String query = "SELECT * FROM claims WHERE claim_id = ?";
 
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, claimId);
+            statement.setInt(1, claimId);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                User policyHolder = getPolicyHolder(resultSet.getString("policy_holder_id"));
+                User policyHolder = getPolicyHolder(resultSet.getInt("policy_holder_id"));
                 Policy policy = getPolicy(resultSet.getString("policy_number"));
                 Date claimDate = resultSet.getDate("claim_date");
                 String cardNumber = resultSet.getString("card_number");
@@ -42,16 +41,16 @@ public class ClaimServiceImpl implements ClaimService {
         return null;
     }
 
-    public static User getPolicyHolder(String policyHolderId) {
+    public static User getPolicyHolder(int policyHolderId) {
         String query = "SELECT * FROM users WHERE id = ?";
 
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, policyHolderId);
+            statement.setInt(1, policyHolderId);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                String userId = resultSet.getString("id");
+                int userId = resultSet.getInt("id");
                 String username = resultSet.getString("username");
                 String password = resultSet.getString("password");
                 String fullName = resultSet.getString("full_name");
@@ -78,8 +77,8 @@ public class ClaimServiceImpl implements ClaimService {
 
             if (resultSet.next()) {
                 String policyIdValue = resultSet.getString("policy_number");
-                String policyHolderId = resultSet.getString("user_id");
-                PolicyType policyType = PolicyType.valueOf(resultSet.getString("type"));
+                String policyHolderId = resultSet.getString("id");
+                PolicyType policyType = PolicyType.valueOf(resultSet.getString("type").toUpperCase());
                 Date startDate = resultSet.getDate("start_date");
                 Date endDate = resultSet.getDate("end_date");
 
@@ -96,7 +95,7 @@ public class ClaimServiceImpl implements ClaimService {
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, claim.getPolicyId().getPolicyId());
-            statement.setString(2, claim.getPolicyHolder().getUserId());
+            statement.setInt(2, claim.getPolicyHolder().getUserId());
             statement.setDate(3, new Date(claim.getClaimDate().getTime()));
             statement.setString(4, claim.getCardNumber());
             statement.setDate(5, new Date(claim.getExamDate().getTime()));
@@ -105,7 +104,7 @@ public class ClaimServiceImpl implements ClaimService {
             statement.setString(8, claim.getReceiverBank());
             statement.setString(9, claim.getReceiverName());
             statement.setString(10, claim.getReceiverNumber());
-            statement.setString(11, claim.getId());
+            statement.setInt(11, claim.getId());
 
             statement.executeUpdate();
         }
@@ -117,9 +116,9 @@ public class ClaimServiceImpl implements ClaimService {
 
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, claim.getId());
+            statement.setInt(1, claim.getId());
             statement.setString(2, claim.getPolicyId().getPolicyId());
-            statement.setString(3, claim.getPolicyHolder().getUserId());
+            statement.setInt(3, claim.getPolicyHolder().getUserId());
             statement.setDate(4, new Date(claim.getClaimDate().getTime()));
             statement.setString(5, claim.getCardNumber());
             statement.setDate(6, new Date(claim.getExamDate().getTime()));
@@ -133,12 +132,12 @@ public class ClaimServiceImpl implements ClaimService {
         }
     }
     @Override
-    public void deleteClaim(String claimId) throws Exception {
+    public void deleteClaim(int claimId) throws Exception {
         String query = "DELETE FROM claims WHERE claim_id = ?";
 
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, claimId);
+            statement.setInt(1, claimId);
 
             statement.executeUpdate();
         }

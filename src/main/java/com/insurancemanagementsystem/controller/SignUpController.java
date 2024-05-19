@@ -41,7 +41,7 @@ public class SignUpController {
 
         if (password.equals(confirmPassword)) {
             try {
-                User user = new User(null, username, password, fullName, Role.USER, email, "000000000"); // Add a phone number or get it from input
+                User user = new User( username, password, fullName, Role.USER, email, "000000000"); // Add a phone number or get it from input
 
                 userService.createUser(user);
                 signUpMessageLabel.setText("Sign-up successful!");
