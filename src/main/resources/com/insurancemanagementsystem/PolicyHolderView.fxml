@@ -1,34 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.insurancemanagementsystem.controller.PolicyHolderController">
    <children>
       <TableView layoutY="107.0" prefHeight="494.0" prefWidth="800.0">
         <columns>
-          <TableColumn prefWidth="69.5" text="claim_id" />
-          <TableColumn prefWidth="97.0" text="policy_number" />
-            <TableColumn prefWidth="83.0" text="date_filed" />
-            <TableColumn prefWidth="187.0" text="description" />
-            <TableColumn prefWidth="103.0" text="status" />
-            <TableColumn prefWidth="127.5" text="amount_claimed" />
-            <TableColumn prefWidth="130.0" text="surveyor_id" />
+          <TableColumn fx:id="claimsDashboard" prefWidth="115.60000914335251" text="claimsDashboard" />
+          <TableColumn fx:id="editClaims" minWidth="0.0" prefWidth="112.0" text="editClaims" />
+          <TableColumn fx:id="personalInfo" minWidth="0.0" prefWidth="170.99998474121094" text="personalInfo" />
         </columns>
       </TableView>
-      <Label layoutX="14.0" layoutY="14.0" text="Insurance Manage System" />
+      <Label fx:id="placeholderLabel" layoutX="626.0" layoutY="14.0" text="placeholder" />
       <Label layoutX="732.0" layoutY="14.0" />
-      <Label layoutX="14.0" layoutY="55.0" text="Label" />
-      <TextField layoutX="82.0" layoutY="51.0" prefHeight="25.0" prefWidth="439.0" />
-      <Button layoutX="538.0" layoutY="51.0" mnemonicParsing="false" text="Search" />
-      <Button layoutX="198.0" layoutY="10.0" mnemonicParsing="false" text="My Claims" />
-      <Button layoutX="302.0" layoutY="10.0" mnemonicParsing="false" text="Dependents claims" />
-      <Button layoutX="706.0" layoutY="51.0" mnemonicParsing="false" text="Save" />
+       <Label layoutX="13.0" layoutY="14.0" text="Insurance Manage System" />
+       <Label layoutX="18.0" layoutY="55.0" text="Find user :" />
+       <TextField fx:id="keywordTextField" layoutX="82.0" layoutY="51.0" prefHeight="25.0" prefWidth="439.0" />
+       <Button layoutX="538.0" layoutY="51.0" mnemonicParsing="false" text="Search" />
+      <Button fx:id="showClaimsDashboard" layoutX="198.0" layoutY="10.0" mnemonicParsing="false" text="My Claims" />
+      <Button fx:id="showEditClaims" layoutX="302.0" layoutY="10.0" mnemonicParsing="false" text="edit claims" />
+      <Button fx:id="showPersonalInfo" layoutX="706.0" layoutY="51.0" mnemonicParsing="false" text="personal in4" />
       <Button layoutX="439.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="164.0" text="Dependents Information" />
       <Button layoutX="712.0" layoutY="10.0" mnemonicParsing="false" text="Username" />
       <Button layoutX="625.0" layoutY="51.0" mnemonicParsing="false" text="Add New" />

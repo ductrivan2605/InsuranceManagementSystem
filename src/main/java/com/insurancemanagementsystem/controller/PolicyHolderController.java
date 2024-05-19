@@ -1,20 +1,24 @@
 package com.insurancemanagementsystem.controller;
 
+import com.insurancemanagementsystem.model.Claim;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 
 public class PolicyHolderController {
+    @FXML
+    private TableView<Claim> claimTableView;
 
     @FXML
-    private VBox claimsDashboard;
+    private TableColumn<Claim, String> claimsDashboard;
 
     @FXML
-    private VBox editClaims;
+    private TableColumn<Claim, String> editClaims;
 
     @FXML
-    private VBox personalInfo;
+    private TableColumn<Claim, String> personalInfo;
 
     @FXML
     private Label placeholderLabel;
