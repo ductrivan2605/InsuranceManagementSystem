@@ -19,3 +19,4 @@ password:123456
 For sign-up: 
 you could create anything you want however the role of the created account it limit to USER only without any Scence. Since in reall-ife senerio the admin would grant permissions
 
+This is the youtube public link: https://youtu.be/nSndve_NHw4
