@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
                 String userEmail = resultSet.getString("email");
                 Integer phoneNumber = resultSet.getInt("phone_number");
 
-                user = new User(id, username, password, fullName, role, userEmail, phoneNumber);
+          //      user = new User(id, username, password, fullName, role, userEmail, phoneNumber);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
                 String userEmail = resultSet.getString("email");
                 int phoneNumber = resultSet.getInt("phone_number");
 
-                users.add(new User(id, username, password, fullName, role, userEmail, phoneNumber));
+             //   users.add(new User(id, username, password, fullName, role, userEmail, phoneNumber));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
             statement.setString(4, user.getRole().toString());
             statement.setString(5, user.getEmail());
             statement.setString(6, user.getUserId());
-            statement.setInt(7, user.getPhoneNumber());
+          //  statement.setInt(7, user.getPhoneNumber());
             statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -148,7 +148,7 @@ public class UserServiceImpl implements UserService {
                 String userEmail = resultSet.getString("email");
                 Integer phoneNumber = resultSet.getInt("phone_number");
 
-                user = new User(id, username, password, fullName, role, userEmail, phoneNumber);
+              //  user = new User(id, username, password, fullName, role, userEmail, phoneNumber);
             }
         } catch (Exception e) {
             e.printStackTrace();

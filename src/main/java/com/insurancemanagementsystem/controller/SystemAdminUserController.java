@@ -68,7 +68,7 @@ public class SystemAdminUserController implements Initializable {
                 Role queryUserRole = Role.valueOf(queryOutput.getString("role"));
                 String queryUserEmail = queryOutput.getString("email");
                 int queryUserPhoneNumber = queryOutput.getInt("phone_number");
-                userSearchObservableList.add(new User(queryUserID, queryUserName, queryUserPassword,queryFullName,queryUserRole,queryUserEmail, queryUserPhoneNumber));
+            //    userSearchObservableList.add(new User(queryUserID, queryUserName, queryUserPassword,queryFullName,queryUserRole,queryUserEmail, queryUserPhoneNumber));
             }
             userIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
             userNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("username"));

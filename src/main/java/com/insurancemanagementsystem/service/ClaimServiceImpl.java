@@ -59,7 +59,7 @@ public class ClaimServiceImpl implements ClaimService {
                 String userEmail = resultSet.getString("user_email");
                 Integer phoneNumber = resultSet.getInt("phone_number");
 
-                return new User(userId, username, password, fullName, Role.valueOf(role), userEmail, phoneNumber);
+            //    return new User(userId, username, password, fullName, Role.valueOf(role), userEmail, phoneNumber);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
