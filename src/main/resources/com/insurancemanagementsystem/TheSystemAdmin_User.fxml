@@ -17,7 +17,7 @@
             <TableColumn fx:id="fullNameTableColumn" prefWidth="127.5" text="Full name" />
             <TableColumn fx:id="roleTableColumn" prefWidth="103.0" text="Role" />
             <TableColumn fx:id="userEmailTableColumn" prefWidth="119.199951171875" text="Email" />
-            <TableColumn fx:id="userPhoneNumberColumn" prefWidth="94.4000244140625" text="Phone number" />
+            <TableColumn fx:id="userPhoneNumberColumnTableColumn" prefWidth="94.4000244140625" text="Phone number" />
         </columns> 
       </TableView>
       <Label layoutX="14.0" layoutY="14.0" text="Insurance Manage System" />

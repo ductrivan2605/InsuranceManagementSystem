@@ -1,7 +1,7 @@
 package com.insurancemanagementsystem.model;
 
 public class User {
-    private String userId;
+    private String id;
     private String username;
     private String password;
     private String fullName;
@@ -20,8 +20,8 @@ public class User {
     }
 
     // Constructor with ID, for retrieving users from the database
-    public User(String userId, String username, String password, String fullName, Role role, String email, String phoneNumber) {
-        this.userId = userId;
+    public User(String id, String username, String password, String fullName, Role role, String email, String phoneNumber) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.fullName = fullName;
@@ -32,11 +32,11 @@ public class User {
 
     // Getters and Setters
     public String getUserId() {
-        return userId;
+        return id;
     }
 
     public void setUserId(String userId) {
-        this.userId = userId;
+        this.id = id;
     }
 
     public String getUsername() {

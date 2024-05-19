@@ -43,7 +43,7 @@ public class ClaimServiceImpl implements ClaimService {
     }
 
     public static User getPolicyHolder(String policyHolderId) {
-        String query = "SELECT * FROM users WHERE user_id = ?";
+        String query = "SELECT * FROM users WHERE id = ?";
 
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -51,7 +51,7 @@ public class ClaimServiceImpl implements ClaimService {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                String userId = resultSet.getString("user_id");
+                String userId = resultSet.getString("id");
                 String username = resultSet.getString("username");
                 String password = resultSet.getString("password");
                 String fullName = resultSet.getString("full_name");

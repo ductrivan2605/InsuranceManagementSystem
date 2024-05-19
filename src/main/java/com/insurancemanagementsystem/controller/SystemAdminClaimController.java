@@ -19,7 +19,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -77,14 +76,14 @@ public class SystemAdminClaimController implements Initializable {
             ResultSet queryOutput = statement.executeQuery(claimViewQuery);
 
             while (queryOutput.next()) {
-                String queryClaimID = queryOutput.getString("claim_id");
+                String queryClaimID = queryOutput.getString("id");
                 Date queryClaimDate = queryOutput.getDate("claim_date");
                 User queryPolicyHolderID = ClaimServiceImpl.getPolicyHolder(queryOutput.getString("policy_holder_id"));
                 String queryCardNumber = queryOutput.getString("card_number");
                 Date queryExamDate = queryOutput.getDate("exam_date");
                 Policy queryPolicyID = ClaimServiceImpl.getPolicy(queryOutput.getString("policy_id"));
                 double queryClaimAmount = queryOutput.getDouble("claim_amount");
-                ClaimStatus queryStatus = ClaimStatus.valueOf(queryOutput.getString("status"));
+                ClaimStatus queryStatus = ClaimStatus.valueOf(queryOutput.getString("claim_status"));
                 String queryReceiverBank = queryOutput.getString("receiver_bank");
                 String queryReceiverName = queryOutput.getString("receiver_name");
                 String queryReceiverNumber = queryOutput.getString("receiver_number");
@@ -92,12 +91,12 @@ public class SystemAdminClaimController implements Initializable {
                 claimSearchObservableList.add(new Claim(queryClaimID, queryClaimDate, queryPolicyHolderID, queryCardNumber, queryExamDate, queryPolicyID, queryClaimAmount, queryStatus, queryReceiverBank, queryReceiverName, queryReceiverNumber));
             }
 
-            claimIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("claim_id"));
+            claimIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
             claimDateTableColumn.setCellValueFactory(new PropertyValueFactory<>("claimDate"));
-            policyHolderIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("policy_holder_id"));
+            policyHolderIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("policyHolderId"));
             cardNumberTableColumn.setCellValueFactory(new PropertyValueFactory<>("cardNumber"));
             examDateTableColumn.setCellValueFactory(new PropertyValueFactory<>("examDate"));
-            policyIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("policy_id"));
+            policyIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("policyID"));
             claimAmountTableColumn.setCellValueFactory(new PropertyValueFactory<>("claimAmount"));
             statusTableColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
             receiverBankTableColumn.setCellValueFactory(new PropertyValueFactory<>("receiverBank"));
@@ -157,7 +156,7 @@ public class SystemAdminClaimController implements Initializable {
     private void handleSwapToClaimDB() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/insurancemanagementsystem/TheSystemAdmin_ClaimView.fxml"));
-            AnchorPane claimDBRoot = loader.load();
+            Pane claimDBRoot = loader.load();
             Scene scene = new Scene(claimDBRoot);
             mainApp.getPrimaryStage().setScene(scene);
             mainApp.getPrimaryStage().setTitle("Insurance Management System - Admin Dashboard -Claim");
@@ -170,7 +169,7 @@ public class SystemAdminClaimController implements Initializable {
     private void handleSwapToUserDB() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/insurancemanagementsystem/TheSystemAdmin_User.fxml"));
-            AnchorPane userDBRoot = loader.load();
+            Pane userDBRoot = loader.load();
             Scene scene = new Scene(userDBRoot);
             mainApp.getPrimaryStage().setScene(scene);
             mainApp.getPrimaryStage().setTitle("Insurance Management System - Admin Dashboard - User");
@@ -183,7 +182,7 @@ public class SystemAdminClaimController implements Initializable {
     private void handleSwapToPolicyDB() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/insurancemanagementsystem/TheSystemAdmin_PolicyView.fxml"));
-            AnchorPane policyDBRoot = loader.load();
+            Pane policyDBRoot = loader.load();
             Scene scene = new Scene(policyDBRoot);
             mainApp.getPrimaryStage().setScene(scene);
             mainApp.getPrimaryStage().setTitle("Insurance Management System - Admin Dashboard - Policy");

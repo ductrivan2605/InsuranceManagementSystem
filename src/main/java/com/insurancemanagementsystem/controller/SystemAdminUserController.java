@@ -64,7 +64,7 @@ public class SystemAdminUserController implements Initializable {
             ResultSet queryOutput = statement.executeQuery(userViewQuery);
 
             while (queryOutput.next()) {
-                String queryUserID = queryOutput.getString("user_id");
+                String queryUserID = queryOutput.getString("id");
                 String queryUserName = queryOutput.getString("username");
                 String queryUserPassword = queryOutput.getString("password");
                 String queryFullName = queryOutput.getString("full_name");
@@ -73,7 +73,7 @@ public class SystemAdminUserController implements Initializable {
                 String queryUserPhoneNumber = queryOutput.getString("phone_number");
                 userSearchObservableList.add(new User(queryUserID, queryUserName, queryUserPassword,queryFullName,queryUserRole,queryUserEmail, queryUserPhoneNumber));
             }
-            userIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("user_id"));
+//            userIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
             userNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
             passWordTableColumn.setCellValueFactory(new PropertyValueFactory<>("password"));
             fullNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("fullName"));

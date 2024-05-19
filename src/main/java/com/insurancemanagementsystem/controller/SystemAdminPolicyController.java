@@ -74,7 +74,7 @@ public class SystemAdminPolicyController implements Initializable {
                     System.err.println("Invalid PolicyType value: " + typeString);
                     queryPolicyType = PolicyType.HEALTH; // Set to a default value or handle the error in another way
                 }
-                String queryPolicyHolder = queryOutput.getString("user_id");
+                String queryPolicyHolder = queryOutput.getString("id");
                 policySearchObservableList.add(new Policy(queryPolicyID, queryPolicyHolder, queryPolicyType, queryStartDate, queryEndDate));
             }
             policyIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("policyId"));
