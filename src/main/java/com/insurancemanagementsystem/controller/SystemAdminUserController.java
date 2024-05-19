@@ -18,7 +18,6 @@ import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -64,7 +63,7 @@ public class SystemAdminUserController implements Initializable {
             ResultSet queryOutput = statement.executeQuery(userViewQuery);
 
             while (queryOutput.next()) {
-                String queryUserID = queryOutput.getString("id");
+                int queryUserID = queryOutput.getInt("id");
                 String queryUserName = queryOutput.getString("username");
                 String queryUserPassword = queryOutput.getString("password");
                 String queryFullName = queryOutput.getString("full_name");

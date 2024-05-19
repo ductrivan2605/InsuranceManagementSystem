@@ -5,6 +5,7 @@ import com.insurancemanagementsystem.model.Claim;
 import com.insurancemanagementsystem.model.ClaimStatus;
 import com.insurancemanagementsystem.model.Policy;
 import com.insurancemanagementsystem.model.User;
+import com.insurancemanagementsystem.service.ClaimService;
 import com.insurancemanagementsystem.service.ClaimServiceImpl;
 import com.insurancemanagementsystem.util.DatabaseConnection;
 import javafx.collections.FXCollections;
@@ -32,6 +33,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SystemAdminClaimController implements Initializable {
+    private ClaimService claimService = new ClaimServiceImpl();
     private final ObservableList<Claim> claimSearchObservableList = FXCollections.observableArrayList();
 
     @FXML
@@ -78,12 +80,12 @@ public class SystemAdminClaimController implements Initializable {
             while (queryOutput.next()) {
                 int queryClaimID = queryOutput.getInt("claim_id");
                 Date queryClaimDate = queryOutput.getDate("claim_date");
-                User queryPolicyHolderID = ClaimServiceImpl.getPolicyHolder(queryOutput.getString("policy_holder_id"));
+                User queryPolicyHolderID = ClaimServiceImpl.getPolicyHolder(queryOutput.getInt("policy_holder_id"));
                 String queryCardNumber = queryOutput.getString("card_number");
                 Date queryExamDate = queryOutput.getDate("exam_date");
-                Policy queryPolicyID = ClaimServiceImpl.getPolicy(queryOutput.getString("policy_id"));
+                Policy queryPolicyID = ClaimServiceImpl.getPolicy(queryOutput.getString("policy_number"));
                 double queryClaimAmount = queryOutput.getDouble("claim_amount");
-                ClaimStatus queryStatus = ClaimStatus.valueOf(queryOutput.getString("claim_status"));
+                ClaimStatus queryStatus = ClaimStatus.valueOf(queryOutput.getString("status"));
                 String queryReceiverBank = queryOutput.getString("receiver_bank");
                 String queryReceiverName = queryOutput.getString("receiver_name");
                 String queryReceiverNumber = queryOutput.getString("receiver_number");
@@ -144,6 +146,8 @@ public class SystemAdminClaimController implements Initializable {
             SortedList<Claim> sortedData = new SortedList<>(filteredData);
 
             sortedData.comparatorProperty().bind(claimTableView.comparatorProperty());
+
+            enableCellEditing();
         } catch (Exception e) {
             Logger.getLogger(SystemAdminClaimController.class.getName()).log(Level.SEVERE, null, e);
             e.printStackTrace();
@@ -189,4 +193,22 @@ public class SystemAdminClaimController implements Initializable {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void handleDelete() throws Exception {
+        // Get the selected claim from the table
+        Claim selectedClaim = claimTableView.getSelectionModel().getSelectedItem();
+        if (selectedClaim != null) {
+            // Remove the selected claim from the list
+            claimSearchObservableList.remove(selectedClaim);
+
+            claimService.deleteClaim(selectedClaim.getId());
+        } else {
+            System.out.println("No claim selected");
+        }
+    }
+    private void enableCellEditing() {
+        claimTableView.setEditable(true);
+        claimTableView.getSelectionModel().setCellSelectionEnabled(true);
+    }
+
 }

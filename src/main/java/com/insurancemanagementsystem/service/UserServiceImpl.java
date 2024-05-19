@@ -15,13 +15,13 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     @Override
-    public Optional<User> getUserById(String id) {
+    public Optional<User> getUserById(int id) {
         User user = null;
 
         try (Connection connection = DatabaseConnection.getConnection()) {
             String query = "SELECT * FROM users WHERE id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, id);
+            statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                String id = resultSet.getString("id");
+                int id = resultSet.getInt("id");
                 String username = resultSet.getString("username");
                 String password = resultSet.getString("password");
                 String fullName = resultSet.getString("full_name");
@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
             statement.setString(4, user.getRole().toString());
             statement.setString(5, user.getEmail());
             statement.setString(6, user.getPhoneNumber());
-            statement.setString(7, user.getUserId());
+            statement.setInt(7, user.getUserId());
             statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -139,7 +139,7 @@ public class UserServiceImpl implements UserService {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                String id = resultSet.getString("id");
+                int id = resultSet.getInt("id");
                 String password = resultSet.getString("password");
                 String fullName = resultSet.getString("full_name");
                 Role role = Role.valueOf(resultSet.getString("role"));
