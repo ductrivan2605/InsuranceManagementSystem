@@ -81,9 +81,6 @@ public class UserServiceImpl implements UserService {
             statement.setString(6, user.getPhoneNumber());
 
             ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                user.setUserId(resultSet.getString("id"));
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }

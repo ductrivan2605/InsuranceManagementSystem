@@ -82,11 +82,17 @@
 package com.insurancemanagementsystem;
 
 import com.insurancemanagementsystem.controller.SignInController;
+import com.insurancemanagementsystem.controller.SystemAdminClaimController;
+import com.insurancemanagementsystem.controller.SystemAdminPolicyController;
+import com.insurancemanagementsystem.controller.SystemAdminUserController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.controlsfx.control.spreadsheet.Grid;
 
 public class MainApp extends Application {
 
@@ -97,15 +103,31 @@ public class MainApp extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Insurance Management System");
 
-        showSignInView();
+        testView();
     }
 
     public void showSignInView() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/insurancemanagementsystem/SignIn.fxml"));
-            Pane signInLayout = loader.load();
+            GridPane signInLayout = loader.load();
 
             SignInController controller = loader.getController();
+            controller.setMainApp(this);
+
+            Scene scene = new Scene(signInLayout);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    // test view for each user type's view - testing purpose will be commented
+    public void testView() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/insurancemanagementsystem/TheSystemAdmin_User.fxml"));
+            AnchorPane signInLayout = loader.load();
+
+            SystemAdminUserController controller = loader.getController();
             controller.setMainApp(this);
 
             Scene scene = new Scene(signInLayout);
@@ -121,7 +143,7 @@ public class MainApp extends Application {
             FXMLLoader loader;
             switch (role) {
                 case "SYSTEM_ADMIN":
-                    loader = new FXMLLoader(getClass().getResource("/com/insurancemanagementsystem/TheSystemAdminView.fxml"));
+                    loader = new FXMLLoader(getClass().getResource("/com/insurancemanagementsystem/TheSystemAdmin_User.fxml"));
                     break;
                 case "POLICY_HOLDER":
                     loader = new FXMLLoader(getClass().getResource("/com/insurancemanagementsystem/PolicyHolderView.fxml"));
@@ -138,7 +160,6 @@ public class MainApp extends Application {
                 case "INSURANCE_MANAGER":
                     loader = new FXMLLoader(getClass().getResource("/com/insurancemanagementsystem/InsuranceManagerView.fxml"));
                     break;
-                // Add cases for other roles as necessary
                 default:
                     throw new IllegalArgumentException("Invalid role: " + role);
             }

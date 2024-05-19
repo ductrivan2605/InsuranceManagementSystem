@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class Policy {
 
-    private int policyId;
-    private int policyHolderId;
-    private String policyType;
+    private String policyId;
+    private String policyHolderId;
+    private PolicyType policyType;
     private Date startDate;
     private Date endDate;
 
 
-    public Policy(int policyId, int policyHolderId, String policyType, Date startDate, Date endDate) {
+    public Policy(String policyId, String policyHolderId, PolicyType policyType, Date startDate, Date endDate) {
         this.policyId = policyId;
         this.policyHolderId = policyHolderId;
         this.policyType = policyType;
@@ -19,16 +19,19 @@ public class Policy {
         this.endDate = endDate;
     }
 
-    public int getPolicyId() {
+    public String getPolicyId() {
         return policyId;
     }
 
-    public int getPolicyHolderId() {
+    public String getPolicyHolderId() {
         return policyHolderId;
     }
 
-    public String getPolicyType() {
+    public PolicyType getPolicyType() {
         return policyType;
+    }
+    public void setPolicyType(PolicyType policyType) {
+        this.policyType = policyType;
     }
 
     public Date getStartDate() {

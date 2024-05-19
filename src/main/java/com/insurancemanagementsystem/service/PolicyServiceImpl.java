@@ -1,6 +1,7 @@
 package com.insurancemanagementsystem.service;
 
 import com.insurancemanagementsystem.model.Policy;
+import com.insurancemanagementsystem.model.PolicyType;
 import com.insurancemanagementsystem.util.DatabaseConnection;
 
 import java.sql.Connection;
@@ -10,18 +11,18 @@ import java.util.Date;
 
 public class PolicyServiceImpl implements PolicyService {
     @Override
-    public Policy getPolicyById(int policyId) {
+    public Policy getPolicyById(String policyId) {
         Policy policy = null;
 
         try (Connection connection = DatabaseConnection.getConnection()) {
-            String query = "SELECT * FROM policies WHERE policy_id = ?";
+            String query = "SELECT * FROM policies WHERE policy_number = ?";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, policyId);
+            statement.setString(1, policyId);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                int policyHolderId = resultSet.getInt("policy_holder_id");
-                String policyType = resultSet.getString("policy_type");
+                String policyHolderId = resultSet.getString("user_id");
+                PolicyType policyType = PolicyType.valueOf(resultSet.getString("type"));
                 Date startDate = resultSet.getDate("start_date");
                 Date endDate = resultSet.getDate("end_date");
 
@@ -37,11 +38,11 @@ public class PolicyServiceImpl implements PolicyService {
     @Override
     public void createPolicy(Policy policy) {
         try (Connection connection = DatabaseConnection.getConnection()) {
-            String query = "INSERT INTO policies (policy_id, policy_holder_id, policy_type, start_date, end_date) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO policies (policy_number, user_id, policy_type, start_date, end_date) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, policy.getPolicyId());
-            statement.setInt(2, policy.getPolicyHolderId());
-            statement.setString(3, policy.getPolicyType());
+            statement.setString(1, policy.getPolicyId());
+            statement.setString(2, policy.getPolicyHolderId());
+            statement.setString(3, policy.getPolicyType().toString());
             statement.setDate(4, new java.sql.Date(policy.getStartDate().getTime()));
             statement.setDate(5, new java.sql.Date(policy.getEndDate().getTime()));
             statement.executeUpdate();
@@ -53,13 +54,13 @@ public class PolicyServiceImpl implements PolicyService {
     @Override
     public void updatePolicy(Policy policy) {
         try (Connection connection = DatabaseConnection.getConnection()) {
-            String query = "UPDATE policies SET policy_holder_id = ?, policy_type = ?, start_date = ?, end_date = ? WHERE policy_id = ?";
+            String query = "UPDATE policies SET user_id = ?, policy_type = ?, start_date = ?, end_date = ? WHERE policy_number = ?";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, policy.getPolicyHolderId());
-            statement.setString(2, policy.getPolicyType());
+            statement.setString(1, policy.getPolicyHolderId());
+            statement.setString(2, policy.getPolicyType().toString());
             statement.setDate(3, new java.sql.Date(policy.getStartDate().getTime()));
             statement.setDate(4, new java.sql.Date(policy.getEndDate().getTime()));
-            statement.setInt(5, policy.getPolicyId());
+            statement.setString(5, policy.getPolicyId());
             statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -67,11 +68,11 @@ public class PolicyServiceImpl implements PolicyService {
     }
 
     @Override
-    public void deletePolicy(int policyId) {
+    public void deletePolicy(String policyId) {
         try (Connection connection = DatabaseConnection.getConnection()) {
-            String query = "DELETE FROM policies WHERE policy_id = ?";
+            String query = "DELETE FROM policies WHERE policy_number = ?";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, policyId);
+            statement.setString(1, policyId);
             statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

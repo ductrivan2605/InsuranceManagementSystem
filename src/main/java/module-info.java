@@ -18,6 +18,7 @@ module com.insurancemanagementsystem {
     requires org.postgresql.jdbc;
 
     opens com.insurancemanagementsystem.controller to javafx.fxml;
+    opens com.insurancemanagementsystem.model to javafx.base;
     exports com.insurancemanagementsystem;
     exports com.insurancemanagementsystem.controller;
 }
