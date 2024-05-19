@@ -13,12 +13,12 @@ import java.util.List;
 public class ClaimServiceImpl implements ClaimService {
 
     @Override
-    public Claim getClaimById(String claimId)  {
+    public Claim getClaimById(int claimId)  {
         String query = "SELECT * FROM claims WHERE claim_id = ?";
 
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, claimId);
+            statement.setInt(1, claimId);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
@@ -105,7 +105,7 @@ public class ClaimServiceImpl implements ClaimService {
             statement.setString(8, claim.getReceiverBank());
             statement.setString(9, claim.getReceiverName());
             statement.setString(10, claim.getReceiverNumber());
-            statement.setString(11, claim.getId());
+            statement.setInt(11, claim.getId());
 
             statement.executeUpdate();
         }
@@ -117,7 +117,7 @@ public class ClaimServiceImpl implements ClaimService {
 
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, claim.getId());
+            statement.setInt(1, claim.getId());
             statement.setString(2, claim.getPolicyId().getPolicyId());
             statement.setString(3, claim.getPolicyHolder().getUserId());
             statement.setDate(4, new Date(claim.getClaimDate().getTime()));
@@ -133,12 +133,12 @@ public class ClaimServiceImpl implements ClaimService {
         }
     }
     @Override
-    public void deleteClaim(String claimId) throws Exception {
+    public void deleteClaim(int claimId) throws Exception {
         String query = "DELETE FROM claims WHERE claim_id = ?";
 
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, claimId);
+            statement.setInt(1, claimId);
 
             statement.executeUpdate();
         }
