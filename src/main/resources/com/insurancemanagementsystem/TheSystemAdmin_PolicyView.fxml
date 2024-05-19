@@ -27,8 +27,7 @@
       <Button fx:id="handleSwapToUserDB" layoutX="302.0" layoutY="10.0" mnemonicParsing="false" text="Beneficiaries Information" />
       <Button layoutX="738.0" layoutY="51.0" mnemonicParsing="false" text="Save" />
       <Button fx:id="handleSwapToPolicyDB" layoutX="455.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="164.0" text="Policies" />
-      <Button layoutX="596.0" layoutY="51.0" mnemonicParsing="false" text="Add New" />
-      <Button layoutX="675.0" layoutY="51.0" mnemonicParsing="false" text="Delete" />
+      <Button layoutX="596.0" layoutY="51.0" mnemonicParsing="false" text="Add New" /><Button layoutX="675.0" layoutY="51.0" mnemonicParsing="false" text="Delete" onAction="#handleDeletePolicy" />
       <Button layoutX="709.0" layoutY="10.0" mnemonicParsing="false" text="Username" />
    </children>
 </AnchorPane>
