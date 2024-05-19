@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml" fx:controller="com.insurancemanagementsystem.controller.AddPolicyController">
+    <GridPane hgap="10" vgap="10">
+        <Label text="Policy Number:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="policyNumberField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Label text="Start Date:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <DatePicker fx:id="startDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="End Date:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <DatePicker fx:id="endDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Label text="Type:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <TextField fx:id="typeField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+        <Label text="Coverage Amount:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+        <TextField fx:id="coverageAmountField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+        <Label text="User ID:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+        <TextField fx:id="userIdField" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+    </GridPane>
+
+    <Button text="Add Policy" onAction="#handleAddPolicy"/>
+</VBox>

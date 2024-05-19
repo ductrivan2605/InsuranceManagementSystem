@@ -1,10 +1,11 @@
 package com.insurancemanagementsystem.controller;
 
+import com.insurancemanagementsystem.service.PolicyService;
 import com.insurancemanagementsystem.MainApp;
 import com.insurancemanagementsystem.model.Policy;
 import com.insurancemanagementsystem.model.PolicyType;
-import com.insurancemanagementsystem.model.Role;
 import com.insurancemanagementsystem.model.User;
+import com.insurancemanagementsystem.service.PolicyServiceImpl;
 import com.insurancemanagementsystem.util.DatabaseConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -38,6 +39,7 @@ public class SystemAdminPolicyController implements Initializable {
     public void setUser(User user) {
         this.user = user;
     }
+
     @FXML
     private TableView<Policy> policyTableView;
     @FXML
@@ -50,7 +52,7 @@ public class SystemAdminPolicyController implements Initializable {
     private TableColumn<Policy, PolicyType> policyTypeTableColumn;
     @FXML
     private TableColumn<Policy, String> policyHolderTableColumn;
-
+    private PolicyService policyService = new PolicyServiceImpl();  // Ideally, this should be injected
     ObservableList<Policy> policySearchObservableList = FXCollections.observableArrayList();
 
     @Override
@@ -75,7 +77,8 @@ public class SystemAdminPolicyController implements Initializable {
                     queryPolicyType = PolicyType.HEALTH; // Set to a default value or handle the error in another way
                 }
                 String queryPolicyHolder = queryOutput.getString("id");
-                policySearchObservableList.add(new Policy(queryPolicyID, queryPolicyHolder, queryPolicyType, queryStartDate, queryEndDate));
+                double queryCoverageAmount = queryOutput.getDouble("coverage_amount");
+                policySearchObservableList.add(new Policy(queryPolicyID, queryPolicyHolder, queryPolicyType, queryStartDate, queryEndDate, queryCoverageAmount));
             }
             policyIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("policyId"));
             startDateTableColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
@@ -89,6 +92,7 @@ public class SystemAdminPolicyController implements Initializable {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void handleSwapToClaimDB() {
         try {
@@ -102,6 +106,7 @@ public class SystemAdminPolicyController implements Initializable {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void handleSwapToUserDB() {
         try {
@@ -115,6 +120,7 @@ public class SystemAdminPolicyController implements Initializable {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void handleSwapToPolicyDB() {
         try {
@@ -124,6 +130,26 @@ public class SystemAdminPolicyController implements Initializable {
             mainApp.getPrimaryStage().setScene(scene);
             mainApp.getPrimaryStage().setTitle("Insurance Management System - Admin Dashboard - Policy");
             mainApp.getPrimaryStage().show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleDeletePolicy() {
+        Policy selectedPolicy = policyTableView.getSelectionModel().getSelectedItem();
+        if (selectedPolicy != null) {
+            deletePolicy(selectedPolicy);
+        } else {
+            System.out.println("No policy selected");
+        }
+    }
+
+    private void deletePolicy(Policy policy) {
+        try {
+            policyService.deletePolicy(policy.getPolicyId());
+            policySearchObservableList.remove(policy);
+            policyTableView.refresh();
         } catch (Exception e) {
             e.printStackTrace();
         }
