@@ -139,7 +139,7 @@ public class UserServiceImpl implements UserService {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                String id = resultSet.getString("id");
+                String id = resultSet.getString("user_id");
                 String password = resultSet.getString("password");
                 String fullName = resultSet.getString("full_name");
                 Role role = Role.valueOf(resultSet.getString("role"));

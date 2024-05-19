@@ -103,7 +103,7 @@ public class MainApp extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Insurance Management System");
 
-        testView();
+        showSignInView();
     }
 
     public void showSignInView() {

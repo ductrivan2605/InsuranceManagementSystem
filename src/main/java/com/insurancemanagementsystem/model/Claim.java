@@ -1,7 +1,7 @@
 package com.insurancemanagementsystem.model;
 import java.util.Date;
 
-public class Claim {
+public class    Claim {
     //    A Claim contains id, claim date, insured person, card number, exam date, list of documents, claim amount, status and receiver banking info
     public String id;
     Date claimDate;
