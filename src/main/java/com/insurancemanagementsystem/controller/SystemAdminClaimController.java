@@ -77,7 +77,7 @@ public class SystemAdminClaimController implements Initializable {
             ResultSet queryOutput = statement.executeQuery(claimViewQuery);
 
             while (queryOutput.next()) {
-                String queryClaimID = queryOutput.getString("id");
+                String queryClaimID = queryOutput.getString("claim_id");
                 Date queryClaimDate = queryOutput.getDate("claim_date");
                 User queryPolicyHolderID = ClaimServiceImpl.getPolicyHolder(queryOutput.getString("policy_holder_id"));
                 String queryCardNumber = queryOutput.getString("card_number");
@@ -92,12 +92,12 @@ public class SystemAdminClaimController implements Initializable {
                 claimSearchObservableList.add(new Claim(queryClaimID, queryClaimDate, queryPolicyHolderID, queryCardNumber, queryExamDate, queryPolicyID, queryClaimAmount, queryStatus, queryReceiverBank, queryReceiverName, queryReceiverNumber));
             }
 
-            claimIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+            claimIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("claim_id"));
             claimDateTableColumn.setCellValueFactory(new PropertyValueFactory<>("claimDate"));
-            policyHolderIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("policyHolderId"));
+            policyHolderIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("policy_holder_id"));
             cardNumberTableColumn.setCellValueFactory(new PropertyValueFactory<>("cardNumber"));
             examDateTableColumn.setCellValueFactory(new PropertyValueFactory<>("examDate"));
-            policyIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("policyID"));
+            policyIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("policy_id"));
             claimAmountTableColumn.setCellValueFactory(new PropertyValueFactory<>("claimAmount"));
             statusTableColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
             receiverBankTableColumn.setCellValueFactory(new PropertyValueFactory<>("receiverBank"));

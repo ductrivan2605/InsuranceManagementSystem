@@ -64,7 +64,7 @@ public class SystemAdminUserController implements Initializable {
             ResultSet queryOutput = statement.executeQuery(userViewQuery);
 
             while (queryOutput.next()) {
-                String queryUserID = queryOutput.getString("id");
+                String queryUserID = queryOutput.getString("user_id");
                 String queryUserName = queryOutput.getString("username");
                 String queryUserPassword = queryOutput.getString("password");
                 String queryFullName = queryOutput.getString("full_name");
@@ -73,12 +73,12 @@ public class SystemAdminUserController implements Initializable {
                 String queryUserPhoneNumber = queryOutput.getString("phone_number");
                 userSearchObservableList.add(new User(queryUserID, queryUserName, queryUserPassword,queryFullName,queryUserRole,queryUserEmail, queryUserPhoneNumber));
             }
-            userIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+            userIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("user_id"));
             userNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
             passWordTableColumn.setCellValueFactory(new PropertyValueFactory<>("password"));
             fullNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("fullName"));
             roleTableColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
-            userEmailTableColumn.setCellValueFactory(new PropertyValueFactory<>("userEmail"));
+            userEmailTableColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
             userPhoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
 
             userTableView.setItems(userSearchObservableList);

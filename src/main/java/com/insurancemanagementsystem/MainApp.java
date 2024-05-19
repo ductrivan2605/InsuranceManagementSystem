@@ -103,7 +103,7 @@ public class MainApp extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Insurance Management System");
 
-        showSignInView();
+        testView();
     }
 
     public void showSignInView() {
@@ -124,10 +124,10 @@ public class MainApp extends Application {
     // test view for each user type's view - testing purpose will be commented
     public void testView() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/insurancemanagementsystem/TheSystemAdmin_User.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/insurancemanagementsystem/TheSystemAdmin_ClaimView.fxml"));
             AnchorPane signInLayout = loader.load();
 
-            SystemAdminUserController controller = loader.getController();
+            SystemAdminClaimController controller = loader.getController();
             controller.setMainApp(this);
 
             Scene scene = new Scene(signInLayout);
@@ -180,4 +180,5 @@ public class MainApp extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
 }
