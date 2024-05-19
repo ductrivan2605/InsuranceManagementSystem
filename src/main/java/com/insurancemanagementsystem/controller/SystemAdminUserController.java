@@ -78,7 +78,7 @@ public class SystemAdminUserController implements Initializable {
             fullNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("fullName"));
             roleTableColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
             userEmailTableColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-            userPhoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+//            userPhoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phone_number"));
 
             userTableView.setItems(userSearchObservableList);
         } catch (Exception e) {
@@ -94,19 +94,6 @@ public class SystemAdminUserController implements Initializable {
             Scene scene = new Scene(claimDBRoot);
             mainApp.getPrimaryStage().setScene(scene);
             mainApp.getPrimaryStage().setTitle("Insurance Management System - Admin Dashboard -Claim");
-            mainApp.getPrimaryStage().show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    @FXML
-    private void handleSwapToUserDB() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/insurancemanagementsystem/TheSystemAdmin_User.fxml"));
-            AnchorPane userDBRoot = loader.load();
-            Scene scene = new Scene(userDBRoot);
-            mainApp.getPrimaryStage().setScene(scene);
-            mainApp.getPrimaryStage().setTitle("Insurance Management System - Admin Dashboard - User");
             mainApp.getPrimaryStage().show();
         } catch (Exception e) {
             e.printStackTrace();
